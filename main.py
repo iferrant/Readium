@@ -15,8 +15,11 @@
 # limitations under the License.
 #
 import webapp2
-from views import MainHandler
+import views
+
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', views.MainHandler),
+    ('/login', views.LoginHandler),
+    ('/post_card', views.CardHandler)
 ], debug=True)
