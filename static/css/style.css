@@ -35,6 +35,12 @@ body {
     border-color: transparent;
     color: white !important;
 }
+
+.navbar-brand {
+    color: #373737 !important;
+    padding-left: 30px !important;
+    font-weight: bold;
+}
 /***************************************************/
  /*********************** LOGIN ***************************/
 .panel-login {
@@ -142,8 +148,10 @@ body {
     display: flex;
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
-    -webkit-justify-content: flex-end;
-    justify-content: flex-end;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
 }
 
 .col-md-5 {
@@ -163,6 +171,7 @@ body {
     width: 700px;
     height: 300px;
     padding: 20px;
+    margin: 5px;
     background-color: white;
     box-shadow: 0 0 1px #B0B0B0;
 
@@ -218,3 +227,81 @@ body {
     color: #373737 !important;
     text-decoration: none !important;
 }
+/***************************************************************************/
+/**************************** WRITE STORY **********************************/
+.write-story {
+    width: 800px;
+    height: 800px;
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 1;
+}
+
+.write-story-form {
+    width: 100%;
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.write-story-form input[type=text] {
+    font-size: 2em;
+    font-weight: bold;
+    width: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 0;
+    background-color: transparent;
+    resize: none;
+    display: -webkit-flex !important;
+    display: flex;
+}
+
+.write-story-form textarea {
+    font-size: 1.2em;
+    width: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 0;
+    background-color: transparent;
+    resize: none;
+    display: -webkit-flex !important;
+    display: flex;
+    flex-basis: 600px;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.write-story-form-button {
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.write-story-form-button input[type=submit] {
+    height: 50px;
+    background-color: #02B875;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 14px 14px;
+    border: none;
+    border-radius: 5px;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+/***************************************************************************/

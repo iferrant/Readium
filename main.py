@@ -21,5 +21,6 @@ import views
 app = webapp2.WSGIApplication([
     ('/', views.MainHandler),
     ('/login', views.LoginHandler),
-    ('/post_card', views.CardHandler)
+    ('/post_card', views.CardHandler),
+    ('/write_story', views.StoryHandler)
 ], debug=True)

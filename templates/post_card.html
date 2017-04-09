@@ -1,21 +1,23 @@
 {% extends 'base.html' %}
 {% block leftContainer %}
-    <!--Card-->
-    <div class="card">
-        <div class="card-block">
-            <a class="card-user">User name</a>
-            <p class="card-date">MM/DD</p>
-            <p class="card-title">Card title</p>
-            <!--Text-->
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <div class="card-btns">
-                <a href="#" class="btn-read-more">Read more...</a>
-                <div class="card-btn-like">
-                    <input type="image" src="../static/img/heart_green.png" width="23" height="22"/>
-                    <span class="card-like-counter">325</span>
+    {% for s in stories %}
+        <!--Card-->
+        <div class="card">
+            <div class="card-block">
+                <a class="card-user">{{ s.author }}</a>
+                <p class="card-date">{{ s.date }}</p>
+                <p class="card-title">{{ s.title }}</p>
+                <!--Text-->
+                <p class="card-text">{{ s.text }}</p>
+                <div class="card-btns">
+                    <a href="#" class="btn-read-more">Read more...</a>
+                    <div class="card-btn-like">
+                        <input type="image" src="../static/img/heart_green.png" width="23" height="22"/>
+                        <span class="card-like-counter">325</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--/.Card-->
+        <!--/.Card-->
+    {% endfor %}
 {% endblock %}

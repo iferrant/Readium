@@ -24,7 +24,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#writestory">Write a story</a></li>
+            <li><a href="/write_story"  style="color:#02B875 !important">Write a story</a></li>
             <li><a href="#profile">PROFILE</a></li>
             <li><a href="/login">SING IN</a></li>
           </ul>
@@ -32,6 +32,12 @@
       </div>
     </nav>
     <div class="container-fluid">
+       <div class="row">
+           <div class="col-md-2 col-md-offset-3">
+               {% block writeStoryContainer %}
+               {% endblock %}
+           </div>
+       </div>
       <div class="row">
         <div class="col-md-7">
             {% block leftContainer %}
