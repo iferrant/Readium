@@ -15,12 +15,12 @@
 # limitations under the License.
 #
 import webapp2
-import views
-
+from controllers.PostListHandler import PostListHandler
+from controllers.LoginHandler import LoginHandler
+from controllers.StoryHandler import StoryHandler
 
 app = webapp2.WSGIApplication([
-    ('/', views.MainHandler),
-    ('/login', views.LoginHandler),
-    ('/post_card', views.CardHandler),
-    ('/write_story', views.StoryHandler)
+    ('/', PostListHandler),
+    ('/login', LoginHandler),
+    ('/write_story', StoryHandler)
 ], debug=True)
