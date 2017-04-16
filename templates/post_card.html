@@ -6,11 +6,11 @@
             <div class="card-block">
                 <a class="card-user">{{ s.author }}</a>
                 <p class="card-date">{{ s.date }}</p>
-                <p class="card-title">{{ s.title }}</p>
+                <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
                 <!--Text-->
                 <p class="card-text">{{ s.text }}</p>
                 <div class="card-btns">
-                    <a href="#" class="btn-read-more">Read more...</a>
+                    <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
                     <div class="card-btn-like">
                         <input type="image" src="../static/img/heart_green.png" width="23" height="22"/>
                         <span class="card-like-counter">325</span>

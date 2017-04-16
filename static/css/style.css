@@ -181,6 +181,10 @@ body {
     flex-direction: column;
 }
 
+.card-block {
+    height: 100%;
+}
+
 .card-user {
     color: #02B875;
     font-size: 1.15em;
@@ -202,6 +206,11 @@ body {
     color: #373737;
     font-family: "PT Sans", Monaco, sans-serif;
     font-size: 1.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .card-btns {
@@ -304,4 +313,26 @@ body {
 textarea:focus, input:focus{
     outline: none;
 }
+/***************************************************************************/
+/********************************READ STORY ********************************/
+.read-container {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.read-container p {
+    min-width: 100%;
+}
+
+.story-title {
+    font-size: 2em;
+    font-weight: bold;
+}
+.story-text {
+    font-size: 1.3em;
+    line-height: 32px;
+}
+/***************************************************************************/
 /***************************************************************************/
