@@ -1,22 +1,29 @@
 import webapp2
+from google.appengine.api import users
 from webapp2_extras import jinja2
-from models.story import Story
+from models.Story import Story
 
 
 class PostListHandler(webapp2.RequestHandler):
     def get(self):
+        user = users.get_current_user()
+        if user is not None:
+            nickname = user.nickname()
+            login_url = users.create_logout_url('/')
+            # values["nickname"] = nickname
+            # values["logout-url"] = logout_url
+        else:
+            nickname = ""
+            login_url = users.create_login_url('/')
+            # values["login-url"] = login_url
+
         jinja = jinja2.get_jinja2(app=self.app)
         stories = Story.query()
+        # values["stories"] = stories
         values = {
-            "stories": stories
+            "stories": stories,
+            "nickname": nickname,
+            "loginurl": login_url
         }
+
         self.response.write(jinja.render_template("post_card.html", **values))
-
-    def post(self):
-        story = Story()
-        story.author = "ivan"
-        story.title = self.request.get('story-title')
-        story.text = self.request.get('story-text')
-        story.put()
-
-        self.redirect("/")

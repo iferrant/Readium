@@ -2,22 +2,44 @@
 {% block leftContainer %}
     {% for s in stories %}
         <!--Card-->
-        <div class="card">
-            <div class="card-block">
-                <a class="card-user">{{ s.author }}</a>
-                <p class="card-date">{{ s.date }}</p>
-                <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
-                <!--Text-->
-                <p class="card-text">{{ s.text }}</p>
-                <div class="card-btns">
-                    <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
-                    <div class="card-btn-like">
-                        <input type="image" src="../static/img/heart_green.png" width="23" height="22"/>
-                        <span class="card-like-counter">325</span>
+        {% if s.image %}
+            <div class="card-with-image">
+                <div class="card-block">
+                    <a class="card-user">{{ s.author }}</a>
+                    <p class="card-date">{{ s.date }}</p>
+                    <div class="card-image-container">
+                        <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
+                    </div>
+                    <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
+                    <!--Text-->
+                    <p class="card-text">{{ s.text }}</p>
+                    <div class="card-btns">
+                        <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
+                        <div class="card-btn-like">
+                            <input type="image" src="../static/img/heart_green.png" width="23" height="22"/>
+                            <span class="card-like-counter">325</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% else %}
+            <div class="card">
+                <div class="card-block">
+                    <a class="card-user">{{ s.author }}</a>
+                    <p class="card-date">{{ s.date }}</p>
+                    <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
+                    <!--Text-->
+                    <p class="card-text">{{ s.text }}</p>
+                    <div class="card-btns">
+                        <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
+                        <div class="card-btn-like">
+                            <input type="image" src="../static/img/heart_green.png" width="23" height="22"/>
+                            <span class="card-like-counter">325</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
         <!--/.Card-->
     {% endfor %}
 {% endblock %}

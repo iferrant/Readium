@@ -24,9 +24,13 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/write_story"  style="color:#02B875 !important">Write a story</a></li>
-            <li><a href="#profile">PROFILE</a></li>
-            <li><a href="/login">SING IN</a></li>
+              {% if nickname %}
+                <li><a href="/write_story"  style="color:#02B875 !important">Write a story</a></li>
+                <li><a href="#">{{ nickname }}</a></li>
+                <li><a href="{{ loginurl }}">Log out</a></li>
+              {% else %}
+                <li><a href="{{ loginurl }}">SING IN</a></li>
+              {% endif %}
           </ul>
         </div>
       </div>

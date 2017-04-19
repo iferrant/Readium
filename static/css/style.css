@@ -169,7 +169,7 @@ body {
 .card {
     font-family: "Lato", Monaco, sans-serif !important;
     width: 700px;
-    height: 300px;
+    height: 230px;
     padding: 20px;
     margin: 5px;
     background-color: white;
@@ -181,6 +181,31 @@ body {
     flex-direction: column;
 }
 
+.card-with-image {
+    font-family: "Lato", Monaco, sans-serif !important;
+    width: 700px;
+    height: 400px;
+    padding: 20px;
+    margin: 5px;
+    background-color: white;
+    box-shadow: 0 0 1px #B0B0B0;
+
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.card-image-container {
+    width: 640px;
+    height: 185px;
+    overflow: hidden;
+
+}
+
+.card .image-responsive {
+    width: 100%;
+}
 .card-block {
     height: 100%;
 }
@@ -188,6 +213,12 @@ body {
 .card-user {
     color: #02B875;
     font-size: 1.15em;
+    text-decoration: none !important;
+}
+
+.card-user:hover {
+    color: #02B875;
+    text-decoration: none !important;
 }
 
 .card-date {
@@ -200,12 +231,19 @@ body {
     font-family: "PT Sans", Monaco, sans-serif;
     font-size: 2.2em;
     font-weight: bold;
+    text-decoration: none !important;
+}
+
+.card-title:hover {
+    color: #373737;
+    text-decoration: none !important;
 }
 
 .card-text {
     color: #373737;
     font-family: "PT Sans", Monaco, sans-serif;
     font-size: 1.2em;
+    max-height: 4.2em;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -229,7 +267,6 @@ body {
 .btn-read-more {
     color: gray !important;
     text-decoration: none !important;
-
 }
 
 .btn-read-more:hover {
