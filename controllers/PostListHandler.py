@@ -26,4 +26,4 @@ class PostListHandler(webapp2.RequestHandler):
             "loginurl": login_url
         }
 
-        self.response.write(jinja.render_template("post_card.html", **values))
+        self.response.write(jinja.render_template("story_card.html", **values))

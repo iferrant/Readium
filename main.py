@@ -18,10 +18,12 @@ import webapp2
 from controllers.PostListHandler import PostListHandler
 from controllers.LoginHandler import LoginHandler
 from controllers.StoryHandler import StoryHandler, ReadStoryHandler
+from controllers.CommentHandler import CommentHandler
 
 app = webapp2.WSGIApplication([
     ('/', PostListHandler),
     ('/login', LoginHandler),
     ('/write_story', StoryHandler),
-    ('/read_story', ReadStoryHandler)
+    ('/read_story', ReadStoryHandler),
+    ('/comment', CommentHandler)
 ], debug=True)

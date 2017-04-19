@@ -31,8 +31,10 @@ class ReadStoryHandler(webapp2.RequestHandler):
             id = None
 
         story = ndb.Key(urlsafe=id).get()
+        user = users.get_current_user()
         read_values = {
-            "story": story
+            "story": story,
+            "user": user
         }
         jinja = jinja2.get_jinja2(app=self.app)
         self.response.write(jinja.render_template("read_story.html", **read_values))
