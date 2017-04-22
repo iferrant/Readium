@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block readStoryContainer %}
+<div class="user-edit-profile">
+    <form action="/profile" method="post" enctype="multipart/form-data">
+        <input type="text" name="user-name" placeholder="User name">
+        <input type="text" name="user-lastname" placeholder="Last name">
+        <input type="text" name="user-description" placeholder="Tell something about you...">
+        <input type="text" name="user-interest" placeholder="Your hobbies or interest">
+        <label for="user-avatar"> Image profile</label>
+        <input type="file" name="user-avatar" id="uploaduseravatar">
+        <input type="submit" value="Done">
+    </form>
+</div>
+{% endblock %}

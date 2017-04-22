@@ -21,12 +21,16 @@
 {% if user %}
     <div class="write-comment-container">
         <form action="/comment" method="post">
-            <input type="text" name="story-id" value="{{ story.key.id() }}" hidden>
+            <input type="text" name="story-key" value="{{ story.key.urlsafe() }}" hidden>
             <input type="text" name="comment-author" value="{{ user }}" hidden>
             <textarea name="comment-text" id="comment-text"></textarea>
             <input type="submit" value="Comment">
         </form>
     </div>
 {% endif %}
+
+{% for c in comments %}
+    <p>{{ c.text }}</p>
+{% endfor %}
 
 {% endblock %}

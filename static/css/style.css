@@ -405,6 +405,121 @@ textarea:focus, input:focus{
 /***************************************************************************/
 /********************************** PROFILE ********************************/
 .user-edit-profile {
+    min-width: 100%;
+    min-height: 500px;
     padding-top: 80px;
+
+    display: -webkit-flex !important;
+    display: flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.user-edit-profile form {
+    margin-left: auto;
+    margin-right: auto;
+
+    display: -webkit-flex !important;
+    display: flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    flex-direction: column !important;
+    -webkit-flex-direction: column !important;
+}
+
+.user-edit-profile input {
+    width: 250px;
+    transition: width 0.5s ease-in-out;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: left;
+    color: #5c5c5c;
+    font: 1em 'Lato';
+}
+
+.user-edit-profile input[type=text] {
+    padding-top: 40px;
+    border: 2px solid #9c9c9c;
+    border-style: hidden hidden solid hidden;
+}
+
+.user-edit-profile input[type=submit] {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.user-edit-profile label {
+    margin-top: 15px;
+    padding-top: -30px;
+    font-family: 'Lato';
+    font-size: 0.9em;
+    color: #9c9c9c;
+}
+
+.user-edit-profile input[type=submit] {
+    height: 50px;
+    background-color: #02B875;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 14px 14px;
+    border: none;
+    border-radius: 5px;
+}
+
+.user-view-profile {
+    min-width: 100%;
+    min-height: 400px;
+    padding-top: 80px;
+    background-color: white;
+    display: -webkit-flex !important;
+    display: flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    flex-direction: row !important;
+    -webkit-flex-direction: row !important;
+}
+
+.user-profile-data {
+    min-width: 300px;
+    min-height: 200px;
+
+    display: -webkit-flex !important;
+    display: flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    flex-direction: column !important;
+    -webkit-flex-direction: column !important;
+}
+
+.user-profile-followers {
+    display: -webkit-flex !important;
+    display: flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    flex-direction: row !important;
+    -webkit-flex-direction: row !important;
+}
+.user-name {
+    color: #373737;
+    font-weight: bold;
+    font-size: 2.2em;
+}
+
+.user-email {
+    padding-top: 15px;
+    color: #9c9c9c;
+    font-size: 1.3em;
+}
+
+.user-follow {
+    padding-top: 20px;
+    color: #9c9c9c;
+    font-size: 1.3em;
+}
+
+.user-profile-image img{
+    width: 250px;
+    height: 250px;
 }
 /***************************************************************************/
