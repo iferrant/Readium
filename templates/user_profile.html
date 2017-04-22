@@ -5,17 +5,24 @@
         <div class="user-profile-data">
             <p class="user-name">{{ u.name }} {{ u.lastname }}</p>
             <p class="user-email">{{ u.user_email }}</p>
-            <form action="/follow?user={{ u.user_email }}" method="post">
-                <input type="submit" name="follow" value="Follow">
-            </form>
             {% if user.description %}
-                <p class="user-email">{{ u.description }}</p>
+            <p class="user-email">{{ u.description }}</p>
             {% endif %}
             <div class="user-profile-followers">
-                <p class="user-follow">{{ u.followers|length }} followers</p>
-                <p class="user-follow">{{ u.following|length }} following</p>
+                <p class="user-follow"><span>{{ u.following|length }}</span> following</p>
+                <p class="user-follow"><span>{{ u.followers|length }}</span> followers</p>
             </div>
-            <p>{{ u.key.urlsafe()}}</p>
+            {% if nickname != u.user_email %}
+                {% if not following %}
+                    <form action="/follow?user={{ u.user_email }}" method="post">
+                        <input type="submit" name="follow" id="follow-button" value="Follow">
+                    </form>
+                {% else %}
+                    <form action="/unfollow?user={{ u.user_email }}" method="post">
+                        <input type="submit" name="unfollow" id="unfollow-button" value="Following">
+                    </form>
+                {% endif %}
+            {% endif %}
         </div>
         {% if u.avatar %}
             <div class="user-profile-image">

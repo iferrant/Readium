@@ -467,7 +467,7 @@ textarea:focus, input:focus{
 
 .user-edit-profile input[type=submit] {
     height: 50px;
-    background-color: #02B875;
+    background-color: #02b875;
     outline: none;
     color: #fff;
     font-size: 14px;
@@ -505,8 +505,6 @@ textarea:focus, input:focus{
 .user-profile-followers {
     display: -webkit-flex !important;
     display: flex;
-    justify-content: space-around;
-    -webkit-justify-content: space-around;
     flex-direction: row !important;
     -webkit-flex-direction: row !important;
 }
@@ -517,19 +515,48 @@ textarea:focus, input:focus{
 }
 
 .user-email {
-    padding-top: 15px;
     color: #9c9c9c;
     font-size: 1.2em;
 }
 
 .user-follow {
     padding-top: 20px;
+    padding-right: 60px;
     color: #9c9c9c;
     font-size: 1.2em;
+}
+
+.user-follow span {
+    color: #5c5c5c;
+    font-weight: bold;
 }
 
 .user-profile-image img{
     width: 250px;
     height: 250px;
+}
+
+.user-profile-data input[id=follow-button] {
+    height: 50px;
+    background-color: white;
+    outline: none;
+    color: #02B875;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 14px 14px;
+    border: solid 2px #02B875;
+    border-radius: 30px;
+}
+
+.user-profile-data input[id=unfollow-button] {
+    height: 50px;
+    background-color: #02B875;
+    outline: none;
+    color: white;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 14px 14px;
+    border: solid 2px #02B875;
+    border-radius: 40px;
 }
 /***************************************************************************/

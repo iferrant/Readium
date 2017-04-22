@@ -11,12 +11,9 @@ class PostListHandler(webapp2.RequestHandler):
         if user is not None:
             nickname = user.nickname()
             login_url = users.create_logout_url('/')
-            # values["nickname"] = nickname
-            # values["logout-url"] = logout_url
         else:
             nickname = ""
             login_url = users.create_login_url('/')
-            # values["login-url"] = login_url
 
         jinja = jinja2.get_jinja2(app=self.app)
         stories = Story.query()

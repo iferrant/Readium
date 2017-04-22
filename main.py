@@ -16,7 +16,7 @@
 #
 import webapp2
 from controllers.PostListHandler import PostListHandler
-from controllers.UserHandler import UserProfile, FollowUserHandler
+from controllers.UserHandler import UserProfile, FollowUserHandler, UnFollowHandler
 from controllers.StoryHandler import StoryHandler, ReadStoryHandler
 from controllers.CommentHandler import CommentHandler
 
@@ -26,5 +26,6 @@ app = webapp2.WSGIApplication([
     ('/read_story', ReadStoryHandler),
     ('/comment', CommentHandler),
     ('/profile', UserProfile),
-    ('/follow', FollowUserHandler)
+    ('/follow', FollowUserHandler),
+    ('/unfollow', UnFollowHandler)
 ], debug=True)
