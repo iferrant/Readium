@@ -2,6 +2,7 @@ import webapp2
 from google.appengine.api import users
 from webapp2_extras import jinja2
 from models.Story import Story
+from models.User import User
 
 
 class PostListHandler(webapp2.RequestHandler):

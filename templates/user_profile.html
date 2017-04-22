@@ -2,20 +2,26 @@
 {% block readStoryContainer %}
 <div class="user-view-profile">
     {% for u in user %}
-    <div class="user-profile-data">
-        <p class="user-name">{{ u.name }} {{ u.lastname }}</p>
-        <p class="user-email">{{ u.user_email }}</p>
-        <div class="user-profile-followers">
-            <p class="user-follow">{{ u.followers}} followers</p>
-            <p class="user-follow">{{ u.following}} following</p>
+        <div class="user-profile-data">
+            <p class="user-name">{{ u.name }} {{ u.lastname }}</p>
+            <p class="user-email">{{ u.user_email }}</p>
+            <form action="/follow?user={{ u.user_email }}" method="post">
+                <input type="submit" name="follow" value="Follow">
+            </form>
+            {% if user.description %}
+                <p class="user-email">{{ u.description }}</p>
+            {% endif %}
+            <div class="user-profile-followers">
+                <p class="user-follow">{{ u.followers|length }} followers</p>
+                <p class="user-follow">{{ u.following|length }} following</p>
+            </div>
+            <p>{{ u.key.urlsafe()}}</p>
         </div>
-        <p>{{ u.key.urlsafe()}}</p>
-    </div>
-    {% if u.avatar %}
-        <div class="user-profile-image">
-            <img src='data:image/png;base64, {{ u.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
-        </div>
-    {% endif %}
+        {% if u.avatar %}
+            <div class="user-profile-image">
+                <img src='data:image/png;base64, {{ u.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
+            </div>
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

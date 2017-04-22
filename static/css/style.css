@@ -442,14 +442,24 @@ textarea:focus, input:focus{
     border-style: hidden hidden solid hidden;
 }
 
+.user-edit-profile textarea {
+    padding-top: 40px;
+    width: auto;
+    height: 10em;
+    background-color: transparent;
+    border: 2px solid #9c9c9c;
+    border-style: hidden hidden solid hidden;
+}
+
 .user-edit-profile input[type=submit] {
     margin-top: 50px;
     margin-bottom: 100px;
+    text-align: center;
 }
 
 .user-edit-profile label {
-    margin-top: 15px;
-    padding-top: -30px;
+    margin-top: 35px;
+    margin-bottom: 10px;
     font-family: 'Lato';
     font-size: 0.9em;
     color: #9c9c9c;
@@ -509,13 +519,13 @@ textarea:focus, input:focus{
 .user-email {
     padding-top: 15px;
     color: #9c9c9c;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 .user-follow {
     padding-top: 20px;
     color: #9c9c9c;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 .user-profile-image img{

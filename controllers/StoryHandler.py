@@ -1,4 +1,5 @@
 import webapp2
+import time
 from webapp2_extras import jinja2
 from google.appengine.api import users, images
 from google.appengine.ext import ndb
@@ -20,6 +21,7 @@ class StoryHandler(webapp2.RequestHandler):
         if image:
             story.image = image
         story.put()
+        time.sleep(1)
 
         self.redirect("/")
 

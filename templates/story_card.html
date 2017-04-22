@@ -4,7 +4,7 @@
     <!--Card-->
         <div class="card-with-image">
             <div class="card-block">
-                <a class="card-user">{{ s.author }}</a>
+                <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
                 <p class="card-date">{{ s.date }}</p>
                 {% if s.image %}
                 <div class="card-image-container">

@@ -8,6 +8,6 @@ class User(ndb.Model):
     avatar = ndb.BlobProperty(required=False)
     description = ndb.StringProperty(required=False)
     interest = ndb.StringProperty(required=False)
-    followers = ndb.IntegerProperty(default=0)
-    following = ndb.IntegerProperty(default=0)
+    followers = ndb.StringProperty(repeated=True)
+    following = ndb.StringProperty(repeated=True)
 
