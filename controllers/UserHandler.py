@@ -2,11 +2,36 @@ import webapp2
 import time
 from webapp2_extras import jinja2
 from google.appengine.api import users
+from google.appengine.ext import ndb
 from models.User import User
+from models.Story import Story
+
+
+def retrieve_like_stories(profile):
+    """
+    Retrieve stories liked of the user
+    :param profile: User
+    :return: List of stories
+    """
+    user_profile = profile.get()
+    likes = list()
+    for l in user_profile.likes:
+        likes.append(ndb.Key(urlsafe=l).get())
+        print(l.title)
+        time.sleep(1)
+
+    return likes
 
 
 class UserProfile(webapp2.RequestHandler):
+
     def get(self):
+        """
+        Render the user profile. If the user didn't edit
+        his profile yet, open the form to edit the profile.
+        If the profile was edited before, open the default
+        profile view.
+        """
         jinja = jinja2.get_jinja2(app=self.app)
 
         try:
@@ -24,6 +49,7 @@ class UserProfile(webapp2.RequestHandler):
             if profile_email == current_user:
                 # If the current user is opening his profile
                 profile = User.query(User.user_email == current_user)
+                likes = retrieve_like_stories(profile)
                 if profile.count() == 0:
                     self.response.write(jinja.render_template("edit_user_profile.html", **{}))
                 else:
@@ -31,25 +57,28 @@ class UserProfile(webapp2.RequestHandler):
                         "user": profile,
                         "nickname": current_user,
                         "loginurl": logout_url,
-                        "following": False
+                        "following": False,
+                        "likes": likes
                     }
                     self.response.write(jinja.render_template("user_profile.html", **values))
             else:
                 # Open the profile of other user
                 profile = User.query(User.user_email == profile_email)
+                likes = retrieve_like_stories(profile)
                 u = profile.get()
                 is_following = True if current_user in u.followers else False
                 values = {
                     "user": profile,
                     "nickname": current_id,
                     "loginurl": logout_url,
-                    "following": is_following
+                    "following": is_following,
+                    "likes": likes
                 }
                 self.response.write(jinja.render_template("user_profile.html", **values))
 
     def post(self):
         """
-        Create new user
+        Edit profile of the user
         """
         user_email = users.get_current_user().nickname()
         name = self.request.get('user-name')  # Required
@@ -72,7 +101,7 @@ class UserProfile(webapp2.RequestHandler):
         user.following = list()
         user.put()
 
-        time.sleep(1)
+        time.sleep(4)
 
         self.redirect("/profile?user={0}".format(user_email))
 
@@ -80,9 +109,9 @@ class UserProfile(webapp2.RequestHandler):
 class FollowUserHandler(webapp2.RequestHandler):
     def post(self):
         """
-        Add to the following list of the current user, the email of
+        Add to the following list of the current user the email of
         the user that he's following.
-        Add to the followers list of the user that he's following,
+        Add to the followers list of the user that he's following
         the email of the current user.
         If the current user is not logged, open the login window.
         """
@@ -116,6 +145,12 @@ class FollowUserHandler(webapp2.RequestHandler):
 
 class UnFollowHandler(webapp2.RequestHandler):
     def post(self):
+        """
+        Remove from the following list of the current user the email of
+        the user that he's unfollowing.
+        Remove from the followers list of the user that he's unfollowing
+        the email of the current user.
+        """
         try:
             user_to_unfollow = self.request.GET['user']
         except:

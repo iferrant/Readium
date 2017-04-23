@@ -2,11 +2,13 @@ import webapp2
 from google.appengine.api import users
 from webapp2_extras import jinja2
 from models.Story import Story
-from models.User import User
 
 
 class PostListHandler(webapp2.RequestHandler):
     def get(self):
+        """
+        Get all the stories to create the index feed
+        """
         user = users.get_current_user()
         if user is not None:
             nickname = user.nickname()
@@ -17,7 +19,6 @@ class PostListHandler(webapp2.RequestHandler):
 
         jinja = jinja2.get_jinja2(app=self.app)
         stories = Story.query()
-        # values["stories"] = stories
         values = {
             "stories": stories,
             "nickname": nickname,

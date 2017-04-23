@@ -10,4 +10,4 @@ class User(ndb.Model):
     interest = ndb.StringProperty(required=False)
     followers = ndb.StringProperty(repeated=True)
     following = ndb.StringProperty(repeated=True)
-
+    likes = ndb.StringProperty(repeated=True)

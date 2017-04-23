@@ -29,6 +29,49 @@
                 <img src='data:image/png;base64, {{ u.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
             </div>
         {% endif %}
+        </div>
+        <ul  class="nav nav-pills">
+            <li class="active">
+                <a  href="#1a" data-toggle="tab">Likes</a>
+            </li>
+            <li>
+                <a href="#2a" data-toggle="tab">My stories</a>
+            </li>
+            <li>
+                <a href="#3a" data-toggle="tab">Bookmarked</a>
+            </li>
+        </ul>
+
+        <div class="tab-content clearfix">
+            <div class="tab-pane active" id="1a">
+                {% for s in likes %}
+                <div class="card-with-image">
+                    <div class="card-block">
+                        <div class="card-header">
+                            <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
+                            <p class="card-date">{{ s.date }}</p>
+                        </div>
+                        {% if s.image %}
+                        <div class="card-image-container">
+                            <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
+                        </div>
+                        {% endif %}
+                        <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
+                        <!--Text-->
+                        <p class="card-text">{{ s.text }}</p>
+                        <div class="card-btns">
+                            <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="tab-pane" id="2a">
+                <h3>We use the class nav-pills instead of nav-tabs which automatically creates a background color for the tab</h3>
+            </div>
+            <div class="tab-pane" id="3a">
+                <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+            </div>
+        </div>
     {% endfor %}
-</div>
 {% endblock %}

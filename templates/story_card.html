@@ -4,8 +4,10 @@
     <!--Card-->
         <div class="card-with-image">
             <div class="card-block">
-                <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
-                <p class="card-date">{{ s.date }}</p>
+                <div class="card-header">
+                    <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
+                    <p class="card-date">{{ s.date }}</p>
+                </div>
                 {% if s.image %}
                 <div class="card-image-container">
                     <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
@@ -17,8 +19,12 @@
                 <div class="card-btns">
                     <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
                     <div class="card-btn-like">
-                        <input type="image" src="../static/img/heart_green.png" width="23" height="22"/>
-                        <span class="card-like-counter">325</span>
+                        <form action="/likestory?id={{ s.key.urlsafe() }}" method="post">
+                            <input type="image" src="../static/img/heart_green.png" name="story-id" width="23" height="22"/>
+                        </form>
+                        {% if s.likes %}
+                            <span class="card-like-counter">{{ s.likes|length }}</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
