@@ -46,8 +46,11 @@ class ReadStoryHandler(webapp2.RequestHandler):
         time.sleep(2)
         story = ndb.Key(urlsafe=id).get()
         user = users.get_current_user()
+        loginurl = users.create_login_url("/")
         comments = Comment.query(id == Comment.story_key)
         read_values = {
+            "nickname": user.nickname(),
+            "loginurl": loginurl,
             "story": story,
             "user": user,
             "comments": comments

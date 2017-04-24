@@ -97,7 +97,31 @@
                 {% endif %}
             </div>
             <div class="tab-pane" id="3a">
-                <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+                {% if bookmarks %}
+                {% for s in bookmarks %}
+                <div class="card-with-image">
+                    <div class="card-block">
+                        <div class="card-header">
+                            <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
+                            <p class="card-date">{{ s.date }}</p>
+                        </div>
+                        {% if s.image %}
+                        <div class="card-image-container">
+                            <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
+                        </div>
+                        {% endif %}
+                        <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
+                        <!--Text-->
+                        <p class="card-text">{{ s.text }}</p>
+                        <div class="card-btns">
+                            <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                    <span class="empty-contianer"></span>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

@@ -275,6 +275,10 @@ body {
     flex-direction: row;
 }
 
+.card-btn-like .bookmark {
+    margin-right: 25px;
+}
+
 .card-like-counter {
     margin-left: 20px;
     margin-top: 5px;

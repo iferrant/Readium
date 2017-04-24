@@ -18,7 +18,6 @@ def retrieve_like_stories(profile):
     if user_profile.likes:
         for l in user_profile.likes:
             likes.append(ndb.Key(urlsafe=l).get())
-            print(l.title)
             time.sleep(1)
 
     return likes
@@ -34,6 +33,17 @@ def retrieve_user_stories(profile):
     stories = Story.query(Story.author == user_profile.user_email)
 
     return stories
+
+
+def retrieve_bookmarks(profile):
+    user_profile = profile.get()
+    bookmars = list()
+    if user_profile.bookmarks:
+        for b in user_profile.bookmarks:
+            bookmars.append(ndb.Key(urlsafe=b).get())
+            time.sleep(1)
+
+    return bookmars
 
 
 class UserProfile(webapp2.RequestHandler):
@@ -72,13 +82,15 @@ class UserProfile(webapp2.RequestHandler):
                 else:
                     stories = retrieve_user_stories(profile)
                     likes = retrieve_like_stories(profile)
+                    bookmarks = retrieve_bookmarks(profile)
                     values = {
                         "user": profile,
                         "nickname": current_user,
                         "loginurl": logout_url,
                         "following": False,
                         "likes": likes,
-                        "stories": stories
+                        "stories": stories,
+                        "bookmarks": bookmarks
                     }
                     self.response.write(jinja.render_template("user_profile.html", **values))
             else:
@@ -86,6 +98,7 @@ class UserProfile(webapp2.RequestHandler):
                 profile = User.query(User.user_email == profile_email)
                 likes = retrieve_like_stories(profile)
                 stories = retrieve_user_stories(profile)
+                bookmarks = retrieve_bookmarks(profile)
                 u = profile.get()
                 is_following = True if current_user in u.followers else False
                 values = {
@@ -94,7 +107,8 @@ class UserProfile(webapp2.RequestHandler):
                     "loginurl": logout_url,
                     "following": is_following,
                     "likes": likes,
-                    "stories": stories
+                    "stories": stories,
+                    "bookmarks": bookmarks
                 }
                 self.response.write(jinja.render_template("user_profile.html", **values))
 
@@ -197,3 +211,23 @@ class UnFollowHandler(webapp2.RequestHandler):
             print(user.user_email + " unfollows -> " + unfollow_user.user_email)
 
         self.redirect("/profile?user={0}".format(user_to_unfollow))
+
+
+class BookmarkStoryHandler(webapp2.RequestHandler):
+    def post(self):
+        try:
+            story_id = self.request.GET['id']
+        except:
+            story_id = None
+
+        current_user = users.get_current_user()
+        c_user = User.query(User.user_email == current_user.nickname())
+        user = c_user.get()
+        if story_id in user.bookmarks:
+            user.bookmarks.remove(story_id)
+        else:
+            user.bookmarks.append(story_id)
+        user.put()
+        time.sleep(1)
+
+        self.redirect("/")
