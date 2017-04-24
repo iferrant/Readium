@@ -15,12 +15,25 @@ def retrieve_like_stories(profile):
     """
     user_profile = profile.get()
     likes = list()
-    for l in user_profile.likes:
-        likes.append(ndb.Key(urlsafe=l).get())
-        print(l.title)
-        time.sleep(1)
+    if user_profile.likes:
+        for l in user_profile.likes:
+            likes.append(ndb.Key(urlsafe=l).get())
+            print(l.title)
+            time.sleep(1)
 
     return likes
+
+
+def retrieve_user_stories(profile):
+    """
+    Retrieve stories writen of a user
+    :param profile: Author 
+    :return: List of stories 
+    """
+    user_profile = profile.get()
+    stories = Story.query(Story.author == user_profile.user_email)
+
+    return stories
 
 
 class UserProfile(webapp2.RequestHandler):
@@ -49,22 +62,30 @@ class UserProfile(webapp2.RequestHandler):
             if profile_email == current_user:
                 # If the current user is opening his profile
                 profile = User.query(User.user_email == current_user)
-                likes = retrieve_like_stories(profile)
                 if profile.count() == 0:
-                    self.response.write(jinja.render_template("edit_user_profile.html", **{}))
+                    values = {
+                        "nickname": current_user,
+                        "loginurl": logout_url,
+                    }
+                    self.response.write(jinja.render_template("edit_user_profile.html", **values))
+
                 else:
+                    stories = retrieve_user_stories(profile)
+                    likes = retrieve_like_stories(profile)
                     values = {
                         "user": profile,
                         "nickname": current_user,
                         "loginurl": logout_url,
                         "following": False,
-                        "likes": likes
+                        "likes": likes,
+                        "stories": stories
                     }
                     self.response.write(jinja.render_template("user_profile.html", **values))
             else:
                 # Open the profile of other user
                 profile = User.query(User.user_email == profile_email)
                 likes = retrieve_like_stories(profile)
+                stories = retrieve_user_stories(profile)
                 u = profile.get()
                 is_following = True if current_user in u.followers else False
                 values = {
@@ -72,7 +93,8 @@ class UserProfile(webapp2.RequestHandler):
                     "nickname": current_id,
                     "loginurl": logout_url,
                     "following": is_following,
-                    "likes": likes
+                    "likes": likes,
+                    "stories": stories
                 }
                 self.response.write(jinja.render_template("user_profile.html", **values))
 
