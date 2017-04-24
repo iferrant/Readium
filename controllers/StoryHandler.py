@@ -70,24 +70,43 @@ class LikeStoryHandler(webapp2.RequestHandler):
 
         current_user = users.get_current_user()
 
+        """
+        If the user is not logged, open the log page.
+        If the user didn't edit his profile, open the edit page.
+        Else like or dislike the story.
+        """
         if current_user is None:
             self.redirect(users.create_login_url("/"))
-
         else:
             user = User.query(User.user_email == current_user.nickname())
             user = user.get()
-            user_key = user.key.urlsafe()
+            if user is None:
+                jinja = jinja2.get_jinja2(app=self.app)
+                self.response.write(jinja.render_template("edit_user_profile.html", **{}))
+            else:
+                user_key = user.key.urlsafe()
 
-            print(story_liked_id)
-            story_liked = ndb.Key(urlsafe=story_liked_id).get()
+                print(story_liked_id)
+                story_liked = ndb.Key(urlsafe=story_liked_id).get()
 
-            if story_liked is not None and user_key not in story_liked.likes:
-                story_liked.likes.append(user_key)
-                story_liked.put()
-                time.sleep(1)
+                if story_liked is not None:
+                    print(story_liked.title)
+                    if user_key not in story_liked.likes:
+                        story_liked.likes.append(user_key)
+                        story_liked.put()
+                        time.sleep(1)
 
-                user.likes.append(story_liked_id)
-                user.put()
-                time.sleep(1)
+                        user.likes.append(story_liked_id)
+                        user.put()
+                        time.sleep(1)
+                    else:
+                        story_liked.likes.remove(user_key)
+                        story_liked.put()
+                        time.sleep(1)
 
-            self.redirect("/")
+                        user.likes.remove(story_liked_id)
+                        user.put()
+                        time.sleep(1)
+
+                self.redirect("/")
+

@@ -11,3 +11,4 @@ class User(ndb.Model):
     followers = ndb.StringProperty(repeated=True)
     following = ndb.StringProperty(repeated=True)
     likes = ndb.StringProperty(required=False, repeated=True)
+    bookmarks = ndb.StringProperty(required=False, repeated=True)
