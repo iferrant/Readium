@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
 {% block readStoryContainer %}
-<div class="user-edit-profile">
-    <form action="/profile" method="post" enctype="multipart/form-data">
-        <input type="text" name="user-name" placeholder="User name" required>
-        <input type="text" name="user-lastname" placeholder="Last name" required>
-        <textarea name="user-description" placeholder="Tell something about you..."></textarea>
-        <input type="text" name="user-interest" placeholder="Your hobbies or interest">
-        <label for="uploaduseravatar"> Image profile</label>
-        <input type="file" name="user-avatar" id="uploaduseravatar">
-        <input type="submit" value="Done">
-    </form>
-</div>
+{% if user %}
+    <div class="user-edit-profile">
+        <form action="/editprofile" method="post" enctype="multipart/form-data">
+            <input type="text" name="user-name" value="{{ user.name}}" required>
+            <input type="text" name="user-lastname" value="{{ user.lastname}}" required>
+            {% if user.description %}
+                <textarea name="user-description" placeholder="{{ user.description }}"> {{ user.description}}</textarea>
+            {% endif %}
+            {% if user.interest %}
+                <input type="text" name="user-interest" value="{{ user.interest }}">
+            {% endif %}
+            <label for="editavatar"> Image profile</label>
+            <input type="file" name="user-avatar" id="editavatar">
+            <input type="submit" value="Done">
+        </form>
+    </div>
+{% else %}
+    <div class="user-edit-profile">
+        <form action="/profile" method="post" enctype="multipart/form-data">
+            <input type="text" name="user-name" placeholder="User name" required>
+            <input type="text" name="user-lastname" placeholder="Last name" required>
+            <textarea name="user-description" placeholder="Tell something about you..."></textarea>
+            <input type="text" name="user-interest" placeholder="Your hobbies or interest">
+            <label for="uploaduseravatar"> Image profile</label>
+            <input type="file" name="user-avatar" id="uploaduseravatar">
+            <input type="submit" value="Done">
+        </form>
+    </div>
+{% endif %}
 {% endblock %}

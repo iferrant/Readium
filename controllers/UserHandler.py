@@ -36,6 +36,11 @@ def retrieve_user_stories(profile):
 
 
 def retrieve_bookmarks(profile):
+    """
+    Retrieve bookmarks saved by the user
+    :param profile: User
+    :return: List of stories
+    """
     user_profile = profile.get()
     bookmars = list()
     if user_profile.bookmarks:
@@ -76,6 +81,7 @@ class UserProfile(webapp2.RequestHandler):
                     values = {
                         "nickname": current_user,
                         "loginurl": logout_url,
+                        "user": None  # necessary because the EditProfileHandler
                     }
                     self.response.write(jinja.render_template("edit_user_profile.html", **values))
 
@@ -142,6 +148,62 @@ class UserProfile(webapp2.RequestHandler):
         self.redirect("/profile?user={0}".format(user_email))
 
 
+class EditUserHandler(webapp2.RequestHandler):
+    def get(self):
+        """
+        Get the profile of the user to edit.
+        The form has as default values the current user values
+        """
+        jinja = jinja2.get_jinja2(app=self.app)
+
+        try:
+            profile_email = self.request.GET['user']
+        except:
+            profile_email = None
+
+        current_id = users.get_current_user()
+        if current_id is None:
+            self.redirect(users.create_login_url("/"))
+        else:
+            user = User.query(User.user_email == profile_email)
+            user = user.get()
+            values = {
+                "nickname": profile_email,
+                "loginurl": users.create_logout_url("/"),
+                "user": user
+            }
+            self.response.write(jinja.render_template("edit_user_profile.html", **values))
+
+    def post(self):
+        """
+        Update the user profile with the new data
+        """
+        user_email = users.get_current_user().nickname()
+        name = self.request.get('user-name')  # Required
+        lastname = self.request.get('user-lastname')  # Required
+        avatar = self.request.get('user-avatar')
+        description = self.request.get('user-description')
+        interest = self.request.get('user-interest')
+
+        user = User.query(User.user_email == user_email)
+        user = user.get()
+
+        if user is not None:
+            user.user_email = user_email
+            user.name = name
+            user.lastname = lastname
+            if avatar != "":
+                user.avatar = avatar
+            if description != "":
+                user.description = description
+            if interest != "":
+                user.interest = interest
+            user.put()
+            time.sleep(4)
+
+        self.redirect("/profile?user={0}".format(user_email))
+
+
 class FollowUserHandler(webapp2.RequestHandler):
     def post(self):
         """
@@ -202,19 +264,20 @@ class UnFollowHandler(webapp2.RequestHandler):
             unfollow_user.followers.remove(user.user_email)
             unfollow_user.put()
             time.sleep(1)
-            print(unfollow_user.user_email + " remove follower -> " + user.user_email)
 
         if unfollow_user.user_email in user.following:
             user.following.remove(unfollow_user.user_email)
             user.put()
             time.sleep(1)
-            print(user.user_email + " unfollows -> " + unfollow_user.user_email)
 
         self.redirect("/profile?user={0}".format(user_to_unfollow))
 
 
 class BookmarkStoryHandler(webapp2.RequestHandler):
     def post(self):
+        """
+        Save the story id on the bookmarks list of the user
+        """
         try:
             story_id = self.request.GET['id']
         except:
