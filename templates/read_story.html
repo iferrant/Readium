@@ -5,6 +5,9 @@
         <div class="read-story-user">
             <p class="card-user">{{ story.author }}</p>
             <p class="card-date">{{ story.date }}</p>
+            {% if story.author == nickname %}
+                <a href="/edit_story?id= {{ story.key.urlsafe() }}">E</a>
+            {% endif %}
         </div>
         <p class="read-story-title">{{ story.title }}</p>
     </div>

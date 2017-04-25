@@ -24,13 +24,13 @@ from controllers.CommentHandler import CommentHandler
 app = webapp2.WSGIApplication([
     ('/', PostListHandler),
     ('/write_story', StoryHandler),
-    ('/editstory', EditStoryHandler),
+    ('/edit_story', EditStoryHandler),
     ('/read_story', ReadStoryHandler),
     ('/comment', CommentHandler),
     ('/profile', UserProfile),
-    ('/editprofile', EditUserHandler),
+    ('/edit_profile', EditUserHandler),
     ('/follow', FollowUserHandler),
     ('/unfollow', UnFollowHandler),
-    ('/likestory', LikeStoryHandler),
-    ('/bookmarkstory', BookmarkStoryHandler)
+    ('/like_story', LikeStoryHandler),
+    ('/bookmark_story', BookmarkStoryHandler)
 ], debug=True)

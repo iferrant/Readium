@@ -33,6 +33,50 @@ class StoryHandler(webapp2.RequestHandler):
         self.redirect("/")
 
 
+class EditStoryHandler(webapp2. RequestHandler):
+    def get(self):
+        try:
+            id = self.request.GET['id']
+        except:
+            id = None
+
+        story = ndb.Key(urlsafe=id).get()
+
+        if story is not None:
+            values = {
+                "story": story
+            }
+            jinja = jinja2.get_jinja2(app=self.app)
+            self.response.write(jinja.render_template("write_story_edit.html", **values))
+
+        else:
+            self.redirect("/")
+
+    def post(self):
+        """
+        Edit story
+        """
+        try:
+            id = self.request.GET['id']
+        except:
+            id = None
+
+        story = ndb.Key(urlsafe=id).get()
+        if story is not None:
+            image = self.request.get('story-image')
+            story.title = self.request.get('story-title')
+            story.text = self.request.get('story-text')
+            if image:
+                story.image = image
+            story.put()
+            time.sleep(1)
+
+        if id is not None:
+            self.redirect("/read_story?id={0}".format(id))
+        else:
+            self.redirect("/")
+
+
 class ReadStoryHandler(webapp2.RequestHandler):
     def get(self):
         """
@@ -85,11 +129,10 @@ class LikeStoryHandler(webapp2.RequestHandler):
             user = user.get()
             if user is None:
                 jinja = jinja2.get_jinja2(app=self.app)
-                self.response.write(jinja.render_template("edit_user_profile.html", **{}))
+                self.response.write(jinja.render_template("user_profile_edit.html", **{}))
             else:
                 user_key = user.key.urlsafe()
 
-                print(story_liked_id)
                 story_liked = ndb.Key(urlsafe=story_liked_id).get()
 
                 if story_liked is not None:

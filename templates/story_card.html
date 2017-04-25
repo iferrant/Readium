@@ -19,10 +19,10 @@
                 <div class="card-btns">
                     <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
                     <div class="card-btn-like">
-                        <form class="bookmark" action="/bookmarkstory?id={{ s.key.urlsafe() }}" method="post">
+                        <form class="bookmark" action="/bookmark_story?id={{ s.key.urlsafe() }}" method="post">
                             <input type="image" src="../static/img/bookmark.png" name="bookmark-story" width="24" height="24">
                         </form>
-                        <form action="/likestory?id={{ s.key.urlsafe() }}" method="post">
+                        <form action="/like_story?id={{ s.key.urlsafe() }}" method="post">
                             <input type="image" src="../static/img/heart_green.png" name="story-id" width="23" height="22"/>
                         </form>
                         {% if s.likes %}

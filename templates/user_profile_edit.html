@@ -2,7 +2,7 @@
 {% block readStoryContainer %}
 {% if user %}
     <div class="user-edit-profile">
-        <form action="/editprofile" method="post" enctype="multipart/form-data">
+        <form action="/edit_profile" method="post" enctype="multipart/form-data">
             <input type="text" name="user-name" value="{{ user.name}}" required>
             <input type="text" name="user-lastname" value="{{ user.lastname}}" required>
             {% if user.description %}
@@ -12,7 +12,11 @@
                 <input type="text" name="user-interest" value="{{ user.interest }}">
             {% endif %}
             <label for="editavatar"> Image profile</label>
-            <input type="file" name="user-avatar" id="editavatar">
+            {% if user.avatar %}
+                <input type="file" name="user-avatar" value="{{ user.avatar.encode('base64')}}" id="editavatardefault">
+            {% else %}
+                <input type="file" name="user-avatar" id="editavatar">
+            {% endif %}
             <input type="submit" value="Done">
         </form>
     </div>
