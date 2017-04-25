@@ -5,11 +5,14 @@
         <div class="read-story-user">
             <p class="card-user">{{ story.author }}</p>
             <p class="card-date">{{ story.date }}</p>
-            {% if story.author == nickname %}
-                <a href="/edit_story?id= {{ story.key.urlsafe() }}">E</a>
-            {% endif %}
         </div>
-        <p class="read-story-title">{{ story.title }}</p>
+        <p class="read-story-title">{{ story.title }}
+            {% if story.author == nickname %}
+                <a href="/edit_story?id= {{ story.key.urlsafe() }}">
+                    <img src="../static/img/edit.png" alt="Edit"/>
+                </a>
+            {% endif %}
+        </p>
     </div>
     {% if story.image %}
         <div class="read-container-image">

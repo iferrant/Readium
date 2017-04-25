@@ -5,7 +5,11 @@
         <div class="user-profile-data">
             <div class="user-header-edit">
                 <p class="user-name">{{ u.name }} {{ u.lastname }}</p>
-                <a href="/edit_profile?user={{ nickname }}">E</a>
+                {% if nickname == u.user_email %}
+                    <a href="/edit_profile?user={{ nickname }}">
+                        <img src="../static/img/edit.png" alt="Edit">
+                    </a>
+                {% endif %}
             </div>
             <p class="user-email">{{ u.user_email }}</p>
             {% if u.description %}
