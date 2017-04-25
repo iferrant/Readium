@@ -1,0 +1,32 @@
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="followingModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Following</h4>
+                </div>
+                <div class="modal-body">
+                    {% for f in followinglist %}
+                        {% if f.avatar %}
+                            <a href="/profile?user={{ f.user_email }}">
+                                <img src='data:image/png;base64, {{ f.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
+                            </a>
+                        {% endif %}
+                        <div class="modal-body-name">
+                            <a href="/profile?user={{ f.user_email }}"><p>{{ f.name }} {{ f.lastname }}</p></a>
+                            <span>{{ f.user_email }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

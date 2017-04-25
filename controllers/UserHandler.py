@@ -51,6 +51,40 @@ def retrieve_bookmarks(profile):
     return bookmars
 
 
+def retrieve_following(profile):
+    """
+    Retrieve a list of following users
+    :param profile: User 
+    :return: List of following users
+    """
+    user_profile = profile.get()
+    following = list()
+    if user_profile.following:
+        for f in user_profile.following:
+            user = User.query(User.user_email == f)
+            user = user.get()
+            following.append(user)
+
+    return following
+
+
+def retrieve_followers(profile):
+    """
+    Retrieve a list of users followers
+    :param profile: User 
+    :return: List of users followers
+    """
+    user_profile = profile.get()
+    followers = list()
+    if user_profile.followers:
+        for f in user_profile.followers:
+            user = User.query(User.user_email == f)
+            user = user.get()
+            followers.append(user)
+
+    return followers
+
+
 class UserProfile(webapp2.RequestHandler):
 
     def get(self):
@@ -89,6 +123,8 @@ class UserProfile(webapp2.RequestHandler):
                     stories = retrieve_user_stories(profile)
                     likes = retrieve_like_stories(profile)
                     bookmarks = retrieve_bookmarks(profile)
+                    following = retrieve_following(profile)
+                    followers = retrieve_followers(profile)
                     values = {
                         "user": profile,
                         "nickname": current_user,
@@ -96,7 +132,9 @@ class UserProfile(webapp2.RequestHandler):
                         "following": False,
                         "likes": likes,
                         "stories": stories,
-                        "bookmarks": bookmarks
+                        "bookmarks": bookmarks,
+                        "followinglist": following,
+                        "followers": followers
                     }
                     self.response.write(jinja.render_template("user_profile.html", **values))
             else:
@@ -105,6 +143,8 @@ class UserProfile(webapp2.RequestHandler):
                 likes = retrieve_like_stories(profile)
                 stories = retrieve_user_stories(profile)
                 bookmarks = retrieve_bookmarks(profile)
+                following = retrieve_following(profile)
+                followers = retrieve_followers(profile)
                 u = profile.get()
                 is_following = True if current_user in u.followers else False
                 values = {
@@ -114,7 +154,9 @@ class UserProfile(webapp2.RequestHandler):
                     "following": is_following,
                     "likes": likes,
                     "stories": stories,
-                    "bookmarks": bookmarks
+                    "bookmarks": bookmarks,
+                    "followinglist": following,
+                    "followers": followers
                 }
                 self.response.write(jinja.render_template("user_profile.html", **values))
 

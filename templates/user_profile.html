@@ -16,8 +16,8 @@
                 <p class="user-email">{{ u.description }}</p>
             {% endif %}
             <div class="user-profile-followers">
-                <p class="user-follow"><span>{{ u.following|length }}</span> following</p>
-                <p class="user-follow"><span>{{ u.followers|length }}</span> followers</p>
+                <a class="btn btn-default" data-toggle="modal" data-target="#followingModal"><span>{{ u.following|length }}</span> following</a>
+                <a class="btn btn-default" data-toggle="modal" data-target="#followersModal"><span>{{ u.followers|length }}</span> followers</a>
             </div>
             {% if nickname != u.user_email %}
                 {% if not following %}
@@ -78,4 +78,9 @@
             </div>
         </div>
     {% endfor %}
+
+<!-- Modal of Following/Followers -->
+{% include 'following_modal.html' %}
+{% include 'followers_modal.html' %}
+
 {% endblock %}
