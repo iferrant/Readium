@@ -8,7 +8,7 @@ from models.Comment import Comment
 from models.User import User
 
 
-class StoryHandler(webapp2.RequestHandler):
+class WriteStoryHandler(webapp2.RequestHandler):
     def get(self):
         """
         Open the story editor to create a new awesome story
