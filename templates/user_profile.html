@@ -3,10 +3,12 @@
 <div class="user-view-profile">
     {% for u in user %}
         <div class="user-profile-data">
-            <p class="user-name">{{ u.name }} {{ u.lastname }}</p>
+            <div class="user-header-edit">
+                <p class="user-name">{{ u.name }} {{ u.lastname }}</p>
+                <a href="/editprofile?user={{ nickname }}">E</a>
+            </div>
             <p class="user-email">{{ u.user_email }}</p>
-            <a href="/editprofile?user={{ nickname }}">E</a>
-            {% if user.description %}
+            {% if u.description %}
                 <p class="user-email">{{ u.description }}</p>
             {% endif %}
             <div class="user-profile-followers">

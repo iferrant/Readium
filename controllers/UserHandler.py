@@ -83,7 +83,7 @@ class UserProfile(webapp2.RequestHandler):
                         "loginurl": logout_url,
                         "user": None  # necessary because the EditProfileHandler
                     }
-                    self.response.write(jinja.render_template("edit_user_profile.html", **values))
+                    self.response.write(jinja.render_template("user_profile_edit.html", **values))
 
                 else:
                     stories = retrieve_user_stories(profile)
@@ -172,7 +172,7 @@ class EditUserHandler(webapp2.RequestHandler):
                 "loginurl": users.create_logout_url("/"),
                 "user": user
             }
-            self.response.write(jinja.render_template("edit_user_profile.html", **values))
+            self.response.write(jinja.render_template("user_profile_edit.html", **values))
 
     def post(self):
         """
