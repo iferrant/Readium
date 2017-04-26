@@ -333,6 +333,17 @@ body {
     flex-direction: row;
 }
 
+.search-box input{
+    margin-bottom: 20px;
+    padding-left: 26px;
+    background-image: url("/static/img/glass.png");
+    background-size: 17px 17px;
+    background-position: 3px 3px;
+    background-repeat: no-repeat;
+    border: 2px solid #EEEEEE;
+    border-style: hidden hidden solid hidden;
+}
+
 .cloud-tags {
     line-height: 3.2em;
 }
@@ -340,6 +351,7 @@ body {
 .tag-title {
     color: gray;
     width: 100%;
+    margin-left: 2px;
     border: 1px solid #EEEEEE !important;
     border-style: hidden hidden solid hidden !important;
 }

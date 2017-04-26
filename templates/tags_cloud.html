@@ -1,9 +1,14 @@
 <div class="search-tag-container">
+    <div class="search-box">
+        <form action="/search_story" method="get">
+            <input type="text" name="search" placeholder="Search title">
+        </form>
+    </div>
     {% if cloudtags %}
         <p class="tag-title">Stories tags</p>
         {% for t in cloudtags %}
             <div class="cloud-tags">
-                <a class="tag-button" href="?tag={{ t }}">{{ t  }}</a>
+                <a class="tag-button" href="?tag={{ t }}">{{ t }}</a>
             </div>
         {% endfor %}
     {% endif %}

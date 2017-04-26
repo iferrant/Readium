@@ -23,6 +23,7 @@ from controllers.CommentHandler import CommentHandler
 
 app = webapp2.WSGIApplication([
     ('/', PostListHandler),
+    ('/search_story', PostListHandler),
     ('/write_story', WriteStoryHandler),
     ('/edit_story', EditStoryHandler),
     ('/read_story', ReadStoryHandler),

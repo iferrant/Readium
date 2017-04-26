@@ -40,11 +40,34 @@ def create_tags_cloud(stories):
 
 
 def get_tag_stories(stories, tag):
+    """
+    Retrieve the stories that have the tag "tag"
+    :param stories: All the stories
+    :param tag: Tag to search
+    :return: List of stories with the tag
+    """
     result = list()
     for s in stories:
         if s.tags:
             if tag in s.tags:
                 result.append(s)
+    return result
+
+
+def search_story(stories, search):
+    """
+    Retrieve the stories witch title match with "search"
+    :param stories: All the stories
+    :param search: Word(s) to search in the stories title
+    :return: List of stories that contains "search"
+    """
+    result = list()
+    for s in stories:
+        if s.title.find(search) != -1:
+            result.append(s)
+        if s.text.find(search) != -1:
+            result.append(s)
+
     return result
 
 
@@ -57,6 +80,11 @@ class PostListHandler(webapp2.RequestHandler):
             tag = self.request.GET['tag']
         except:
             tag = None
+
+        try:
+            search = self.request.get('search')
+        except:
+            search = None
 
         user = users.get_current_user()
         likes = list()
@@ -81,6 +109,9 @@ class PostListHandler(webapp2.RequestHandler):
         if tag:
             # The user is filtering by tag
             stories = get_tag_stories(stories, tag)
+        if search:
+            # The user searches a story
+            stories = search_story(stories, search)
         avatars = create_avatar_dictionary(stories)
         values = {
             "stories": stories,
@@ -94,21 +125,3 @@ class PostListHandler(webapp2.RequestHandler):
         }
 
         self.response.write(jinja.render_template("story_list.html", **values))
-
-
-class TagStoriesHandler(webapp2.RequestHandler):
-    def get(self):
-        try:
-            tag = self.request.GET['tag']
-        except:
-            tag = None
-
-        stories = Story.query()
-        result = list()
-        for s in stories:
-            if s.tags:
-                if tag in s.tags:
-                    result.append(s)
-
-        for r in result:
-            print(r)
