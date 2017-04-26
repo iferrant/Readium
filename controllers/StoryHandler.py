@@ -21,12 +21,16 @@ class WriteStoryHandler(webapp2.RequestHandler):
         Insert the story created on the datastore
         """
         image = self.request.get('story-image')
+        tags = self.request.get('story-tags')
         story = Story()
         story.author = users.get_current_user().nickname()
         story.title = self.request.get('story-title')
         story.text = self.request.get('story-text')
         if image:
             story.image = image
+        if tags:
+            tags = [x.strip() for x in tags.split(',')]
+            story.tags = tags
         story.put()
         time.sleep(1)
 
@@ -140,7 +144,6 @@ class LikeStoryHandler(webapp2.RequestHandler):
                     if user_key not in story_liked.likes:
                         story_liked.likes.append(user_key)
                         story_liked.put()
-                        time.sleep(1)
 
                         user.likes.append(story_liked_id)
                         user.put()
@@ -148,7 +151,6 @@ class LikeStoryHandler(webapp2.RequestHandler):
                     else:
                         story_liked.likes.remove(user_key)
                         story_liked.put()
-                        time.sleep(1)
 
                         user.likes.remove(story_liked_id)
                         user.put()

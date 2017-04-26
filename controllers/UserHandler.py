@@ -346,13 +346,28 @@ class BookmarkStoryHandler(webapp2.RequestHandler):
             story_id = None
 
         current_user = users.get_current_user()
-        c_user = User.query(User.user_email == current_user.nickname())
-        user = c_user.get()
-        if story_id in user.bookmarks:
-            user.bookmarks.remove(story_id)
-        else:
-            user.bookmarks.append(story_id)
-        user.put()
-        time.sleep(1)
 
-        self.redirect("/")
+        """
+        If the user is not logged, open the log page.
+        If the user didn't edit his profile, open the edit page.
+        Else bookmark the story.
+        """
+        if current_user is None:
+            self.redirect(users.create_login_url("/"))
+        else:
+            user = User.query(User.user_email == current_user.nickname())
+            user = user.get()
+            if user is None:
+                jinja = jinja2.get_jinja2(app=self.app)
+                self.response.write(jinja.render_template("user_profile_edit.html", **{}))
+            else:
+                c_user = User.query(User.user_email == current_user.nickname())
+                user = c_user.get()
+                if story_id in user.bookmarks:
+                    user.bookmarks.remove(story_id)
+                else:
+                    user.bookmarks.append(story_id)
+                user.put()
+                time.sleep(1)
+
+                self.redirect("/")

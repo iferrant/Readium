@@ -31,8 +31,11 @@ class PostListHandler(webapp2.RequestHandler):
             login_url = users.create_logout_url('/')
             user = User.query(User.user_email == user.nickname())
             user = user.get()
-            likes = user.likes
-            bookmarks = user.bookmarks
+            if user:
+                if user.likes:
+                    likes = user.likes
+                if user.bookmarks:
+                    bookmarks = user.bookmarks
         else:
             nickname = ""
             login_url = users.create_login_url('/')
