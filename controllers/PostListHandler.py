@@ -5,6 +5,19 @@ from models.Story import Story
 from models.User import User
 
 
+def create_avatar_dictionary(stories):
+    avatars = dict()
+    for s in stories:
+        user = User.query(User.user_email == s.author)
+        user = user.get()
+        if user.avatar != "":
+            avatars[user.user_email] = user.avatar
+        else:
+            avatars[user.user_email] = None
+
+    return avatars
+
+
 class PostListHandler(webapp2.RequestHandler):
     def get(self):
         """
@@ -26,12 +39,15 @@ class PostListHandler(webapp2.RequestHandler):
 
         jinja = jinja2.get_jinja2(app=self.app)
         stories = Story.query()
+        avatars = create_avatar_dictionary(stories)
         values = {
             "stories": stories,
             "nickname": nickname,
             "loginurl": login_url,
+            "user": user,
             "likes": likes,
-            "bookmarks": bookmarks
+            "bookmarks": bookmarks,
+            "avatars": avatars
         }
 
         self.response.write(jinja.render_template("story_card.html", **values))

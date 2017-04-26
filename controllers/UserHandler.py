@@ -1,5 +1,6 @@
 import webapp2
 import time
+import itertools
 from webapp2_extras import jinja2
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -85,6 +86,21 @@ def retrieve_followers(profile):
     return followers
 
 
+def create_avatar_dictionary(story, likes, bookmarks):
+    # Concat 3 lists
+    stories = itertools.chain(story, likes, bookmarks)
+    avatars = dict()
+    for s in stories:
+        user = User.query(User.user_email == s.author)
+        user = user.get()
+        if user.avatar != "":
+            avatars[user.user_email] = user.avatar
+        else:
+            avatars[user.user_email] = None
+
+    return avatars
+
+
 class UserProfile(webapp2.RequestHandler):
 
     def get(self):
@@ -125,6 +141,7 @@ class UserProfile(webapp2.RequestHandler):
                     bookmarks = retrieve_bookmarks(profile)
                     following = retrieve_following(profile)
                     followers = retrieve_followers(profile)
+                    avatars = create_avatar_dictionary(stories, likes, bookmarks)
                     values = {
                         "user": profile,
                         "nickname": current_user,
@@ -134,7 +151,8 @@ class UserProfile(webapp2.RequestHandler):
                         "stories": stories,
                         "bookmarks": bookmarks,
                         "followinglist": following,
-                        "followers": followers
+                        "followers": followers,
+                        "avatars": avatars
                     }
                     self.response.write(jinja.render_template("user_profile.html", **values))
             else:
@@ -145,6 +163,7 @@ class UserProfile(webapp2.RequestHandler):
                 bookmarks = retrieve_bookmarks(profile)
                 following = retrieve_following(profile)
                 followers = retrieve_followers(profile)
+                avatars = create_avatar_dictionary(stories, likes, bookmarks)
                 u = profile.get()
                 is_following = True if current_user in u.followers else False
                 values = {
@@ -156,7 +175,8 @@ class UserProfile(webapp2.RequestHandler):
                     "stories": stories,
                     "bookmarks": bookmarks,
                     "followinglist": following,
-                    "followers": followers
+                    "followers": followers,
+                    "avatars": avatars
                 }
                 self.response.write(jinja.render_template("user_profile.html", **values))
 

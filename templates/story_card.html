@@ -5,8 +5,13 @@
         <div class="card-with-image">
             <div class="card-block">
                 <div class="card-header">
-                    <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
-                    <p class="card-date">{{ s.date }}</p>
+                    {% if avatars[s.author] %}
+                            <img src='data:image/png;base64, {{ avatars[s.author].encode("base64") }}' class="img-circle" alt="User avatar">
+                    {% endif %}
+                    <div class="card-header-text">
+                        <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
+                        <p class="card-date">{{ s.date }}</p>
+                    </div>
                 </div>
                 {% if s.image %}
                 <div class="card-image-container">
