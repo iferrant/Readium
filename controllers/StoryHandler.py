@@ -29,7 +29,8 @@ class WriteStoryHandler(webapp2.RequestHandler):
         if image:
             story.image = image
         if tags:
-            tags = [x.strip() for x in tags.split(',')]
+            tags = [x.strip() for x in tags.split(',')]  # Split tags
+            tags = [x.title() for x in tags]  # Capitalize fist letter
             story.tags = tags
         story.put()
         time.sleep(1)
@@ -94,10 +95,14 @@ class ReadStoryHandler(webapp2.RequestHandler):
         time.sleep(2)
         story = ndb.Key(urlsafe=id).get()
         user = users.get_current_user()
+        if user:
+            user = user.nickname()
+        else:
+            user = None
         loginurl = users.create_login_url("/")
         comments = Comment.query(id == Comment.story_key)
         read_values = {
-            "nickname": user.nickname(),
+            "nickname": user,
             "loginurl": loginurl,
             "story": story,
             "user": user,
