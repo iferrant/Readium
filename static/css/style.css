@@ -227,6 +227,18 @@ body {
     margin-right: 10px;
 }
 
+.card-block .card-tags {
+    color: gray;
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.card-block .card-tags-span {
+    padding-left: 10px;
+}
+
 .card-user {
     color: #02B875;
     font-size: 1.15em;
@@ -306,6 +318,41 @@ body {
     color: #373737 !important;
     text-decoration: none !important;
 }
+
+/***************************************************************************/
+/**************************** TAGS CLOUD ***********************************/
+.search-tag-container {
+    padding: 5px;
+    max-height: 500px;
+    max-width: 300px;
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.cloud-tags {
+    line-height: 3.2em;
+}
+
+.tag-title {
+    color: gray;
+    width: 100%;
+    border: 1px solid #EEEEEE !important;
+    border-style: hidden hidden solid hidden !important;
+}
+
+.tag-button {
+    padding: 10px !important;
+    margin-right: 10px  !important;
+    margin-left: 10px !important;
+    text-decoration: none !important;
+    color: gray;
+    background-color: white;
+    border: 1px solid #EEEEEE !important;
+}
 /***************************************************************************/
 /**************************** WRITE STORY **********************************/
 .write-story {
@@ -378,6 +425,15 @@ body {
     padding: 14px 14px;
     border: none;
     border-radius: 5px;
+}
+
+.write-story-form .tags-input {
+    font-size: 1.2em !important;
+    font-weight: normal !important;
+    margin: 10px;
+    padding: 10px 10px !important;
+    border: 1px solid #9c9c9c !important;
+    border-style: hidden hidden solid hidden !important;
 }
 
 textarea:focus, input:focus{

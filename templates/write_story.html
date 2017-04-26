@@ -3,11 +3,12 @@
 <div class="write-story">
     <form class="write-story-form" action="/write_story" method="post" enctype="multipart/form-data">
         <input type="file" name="story-image" id="uploadimage">
+        <input class="tags-input" type="text" name="story-tags" placeholder="Story tags separated by comma">
         <div class="write-story-form-button">
-            <input type="text" name="story-title" placeholder="Title">
+            <input type="text" name="story-title" placeholder="Title" required>
             <input type="submit" value="Publish">
         </div>
-        <textarea name="story-text" placeholder="Tell your story..."></textarea>
+        <textarea name="story-text" placeholder="Tell your story..." required></textarea>
     </form>
 </div>
 {% endblock %}

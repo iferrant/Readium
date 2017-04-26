@@ -1,0 +1,10 @@
+<div class="search-tag-container">
+    {% if cloudtags %}
+        <p class="tag-title">Stories tags</p>
+        {% for t in cloudtags %}
+            <div class="cloud-tags">
+                <a class="tag-button" href="?tag={{ t }}">{{ t  }}</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>

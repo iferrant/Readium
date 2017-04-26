@@ -1,66 +1,71 @@
-{% extends 'base.html' %}
-{% block leftContainer %}
-    {% for s in stories %}
-    <!--Card-->
-        <div class="card-with-image">
-            <div class="card-block">
-                <div class="card-header">
-                    {% if avatars[s.author] %}
-                            <img src='data:image/png;base64, {{ avatars[s.author].encode("base64") }}' class="img-circle" alt="User avatar">
-                    {% endif %}
-                    <div class="card-header-text">
-                        <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
-                        <p class="card-date">{{ s.date }}</p>
-                    </div>
-                </div>
-                {% if s.image %}
-                <div class="card-image-container">
-                    <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
-                </div>
+{% for s in stories %}
+<!--Card-->
+    <div class="card-with-image">
+        <div class="card-block">
+            {% if s.tags %}
+            <div class="card-tags" >
+                <img src="../static/img/tag.png" alt="Tags" width="18" height="18">
+                {% for t in s.tags[0:4] %}
+                <span class="card-tags-span">{{ t }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="card-header">
+                {% if avatars[s.author] %}
+                        <img src='data:image/png;base64, {{ avatars[s.author].encode("base64") }}' class="img-circle" alt="User avatar">
                 {% endif %}
-                <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
-                <!--Text-->
-                <p class="card-text">{{ s.text }}</p>
-                <div class="card-btns">
-                    <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
-                    <div class="card-btn-like">
-                        {% if bookmarks %}
-                            {% if s.key.urlsafe() in bookmarks%}
-                                <form class="bookmark" action="/bookmark_story?id={{ s.key.urlsafe() }}" method="post">
-                                    <input type="image" src="../static/img/bookmark_full.png" name="bookmark-story" width="24" height="24">
-                                </form>
-                            {% else %}
-                                <form class="bookmark" action="/bookmark_story?id={{ s.key.urlsafe() }}" method="post">
-                                    <input type="image" src="../static/img/bookmark.png" name="bookmark-story" width="24" height="24">
-                                </form>
-                            {% endif %}
+                <div class="card-header-text">
+                    <a class="card-user" href="/profile?user={{ s.author }}">{{ s.author }}</a>
+                    <p class="card-date">{{ s.date }}</p>
+                </div>
+            </div>
+            {% if s.image %}
+            <div class="card-image-container">
+                <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
+            </div>
+            {% endif %}
+            <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
+            <!--Text-->
+            <p class="card-text">{{ s.text }}</p>
+            <div class="card-btns">
+                <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
+                <div class="card-btn-like">
+                    {% if bookmarks %}
+                        {% if s.key.urlsafe() in bookmarks%}
+                            <form class="bookmark" action="/bookmark_story?id={{ s.key.urlsafe() }}" method="post">
+                                <input type="image" src="../static/img/bookmark_full.png" name="bookmark-story" width="24" height="24">
+                            </form>
                         {% else %}
                             <form class="bookmark" action="/bookmark_story?id={{ s.key.urlsafe() }}" method="post">
                                 <input type="image" src="../static/img/bookmark.png" name="bookmark-story" width="24" height="24">
                             </form>
                         {% endif %}
-                        {% if likes %}
-                            {% if s.key.urlsafe() in likes %}
-                                <form action="/like_story?id={{ s.key.urlsafe() }}" method="post">
-                                    <input type="image" src="../static/img/heart_green_full.png" name="story-id" width="23" height="22"/>
-                                </form>
-                            {% else %}
-                                <form action="/like_story?id={{ s.key.urlsafe() }}" method="post">
-                                    <input type="image" src="../static/img/heart_gray.png" name="story-id" width="23" height="22"/>
-                                </form>
-                            {% endif %}
+                    {% else %}
+                        <form class="bookmark" action="/bookmark_story?id={{ s.key.urlsafe() }}" method="post">
+                            <input type="image" src="../static/img/bookmark.png" name="bookmark-story" width="24" height="24">
+                        </form>
+                    {% endif %}
+                    {% if likes %}
+                        {% if s.key.urlsafe() in likes %}
+                            <form action="/like_story?id={{ s.key.urlsafe() }}" method="post">
+                                <input type="image" src="../static/img/heart_green_full.png" name="story-id" width="23" height="22"/>
+                            </form>
                         {% else %}
                             <form action="/like_story?id={{ s.key.urlsafe() }}" method="post">
                                 <input type="image" src="../static/img/heart_gray.png" name="story-id" width="23" height="22"/>
                             </form>
                         {% endif %}
-                        {% if s.likes %}
-                            <span class="card-like-counter">{{ s.likes|length }}</span>
-                        {% endif %}
+                    {% else %}
+                        <form action="/like_story?id={{ s.key.urlsafe() }}" method="post">
+                            <input type="image" src="../static/img/heart_gray.png" name="story-id" width="23" height="22"/>
+                        </form>
+                    {% endif %}
+                    {% if s.likes %}
+                        <span class="card-like-counter">{{ s.likes|length }}</span>
+                    {% endif %}
 
-                    </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
-{% endblock %}
+    </div>
+{% endfor %}

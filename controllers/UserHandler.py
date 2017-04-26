@@ -87,6 +87,15 @@ def retrieve_followers(profile):
 
 
 def create_avatar_dictionary(story, likes, bookmarks):
+    """
+    Create a dictionary with author email as the key and
+    the author's avatar as the value. This dictionary
+    will be used to display the avatar on the post card
+    :param story: Stories writen by the user
+    :param likes: Stories liked by the user
+    :param bookmarks: Stories bookmarked by the user
+    :return: Dictionary with K:author email, V:author avatar
+    """
     # Concat 3 lists
     stories = itertools.chain(story, likes, bookmarks)
     avatars = dict()
@@ -165,7 +174,7 @@ class UserProfile(webapp2.RequestHandler):
                 followers = retrieve_followers(profile)
                 avatars = create_avatar_dictionary(stories, likes, bookmarks)
                 u = profile.get()
-                is_following = True if current_user in u.followers else False
+                is_following = current_user in u.followers
                 values = {
                     "user": profile,
                     "nickname": current_id,

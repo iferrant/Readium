@@ -7,4 +7,5 @@ class Story(ndb.Model):
     date = ndb.DateProperty(required=True, auto_now_add=True)
     title = ndb.StringProperty(required=True)
     text = ndb.TextProperty(required=True)
+    tags = ndb.StringProperty(required=False, repeated=True)
     likes = ndb.StringProperty(required=False, repeated=True)
