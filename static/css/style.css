@@ -382,16 +382,10 @@ body {
 /***************************************************************************/
 /**************************** WRITE STORY **********************************/
 .write-story {
-    width: 800px;
-    height: 800px;
-    display: -webkit-flex !important;
-    display: flex;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-shrink: 1;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 80px;
 }
 
 .write-story-form {
