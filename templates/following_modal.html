@@ -10,14 +10,16 @@
                 </div>
                 <div class="modal-body">
                     {% for f in followinglist %}
-                        {% if f.avatar %}
-                            <a href="/profile?user={{ f.user_email }}">
-                                <img src='data:image/png;base64, {{ f.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
-                            </a>
-                        {% endif %}
-                        <div class="modal-body-name">
-                            <a href="/profile?user={{ f.user_email }}"><p>{{ f.name }} {{ f.lastname }}</p></a>
-                            <span>{{ f.user_email }}</span>
+                        <div class="modal-follow">
+                            {% if f.avatar %}
+                                <a href="/profile?user={{ f.user_email }}">
+                                    <img src='data:image/png;base64, {{ f.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
+                                </a>
+                            {% endif %}
+                            <div class="modal-body-name">
+                                <a href="/profile?user={{ f.user_email }}"><p>{{ f.name }} {{ f.lastname }}</p></a>
+                                <span>{{ f.user_email }}</span>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>

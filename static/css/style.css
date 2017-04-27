@@ -751,13 +751,26 @@ textarea:focus, input:focus{
     border-radius: 40px;
 }
  /** Modal Followers/Following **/
-.modal-body {
+.modal-follow {
+    width: 90%;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    border: solid 1px #EEEEEE;
+    border-style: hidden hidden solid hidden;
     display: -webkit-flex !important;
     display: flex;
     flex-direction: row !important;
     -webkit-flex-direction: row !important;
-    -webkit-align-items: center;
-    align-items: center;
+}
+
+.modal-body {
+    display: -webkit-flex !important;
+    display: flex;
+    flex-direction: column !important;
+    -webkit-flex-direction: column !important;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
 }
 
 .modal-body p{
