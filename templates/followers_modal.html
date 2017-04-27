@@ -12,9 +12,13 @@
                     {% for f in followers %}
                         <div class="modal-follow">
                             {% if f.avatar %}
-                            <a href="/profile?user={{ f.user_email }}">
-                                <img src='data:image/png;base64, {{ f.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
-                            </a>
+                                <a href="/profile?user={{ f.user_email }}">
+                                    <img src='data:image/png;base64, {{ f.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
+                                </a>
+                            {% else %}
+                                <a href="/profile?user={{ f.user_email }}">
+                                    <img src='static/img/default-avatar.png' class="img-circle" alt="User avatar">
+                                </a>
                             {% endif %}
                             <div class="modal-body-name">
                                 <a href="/profile?user={{ f.user_email }}"><p>{{ f.name }} {{ f.lastname }}</p></a>

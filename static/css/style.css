@@ -229,6 +229,7 @@ body {
 
 .card-block .card-tags {
     color: gray;
+    padding-bottom: 5px;
     display: -webkit-flex !important;
     display: flex;
     -webkit-flex-direction: row;
@@ -337,6 +338,7 @@ body {
     margin-bottom: 20px;
     padding-left: 26px;
     background-image: url("/static/img/glass.png");
+    background-color: transparent;
     background-size: 17px 17px;
     background-position: 3px 3px;
     background-repeat: no-repeat;
