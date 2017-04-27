@@ -500,6 +500,86 @@ textarea:focus, input:focus{
     line-height: 32px;
 }
 /***************************************************************************/
+/********************************* COMMENTS ********************************/
+
+.write-comment-container {
+    max-width: 800px;
+    max-height: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.write-comment-container form {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.write-comment-container textarea {
+    min-width: 500px;
+    font-size: 1.2em;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #EEEEEE;
+    background-color: transparent;
+    resize: none;
+    display: -webkit-flex !important;
+    display: flex;
+    flex-grow: 1;
+}
+
+.write-comment-container input[type=submit] {
+    height: 40px;
+    background-color: #02B875;
+    margin-bottom: 20px;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 8px 8px;
+    border: none;
+    border-radius: 5px;
+}
+
+.comment-container {
+    background-color: white;
+    max-width: 500px;
+    min-height: 100px;
+    padding: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    box-shadow: 0 0 1px #B0B0B0;
+    display: -webkit-flex !important;
+    display: flex;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+.comment-date {
+    color: gray;
+    font-size: 0.9em;
+}
+
+.comment-container a {
+    color: #02B875;
+    font-size: 1.15em;
+    text-decoration: none !important;
+}
+
+.comment-container a:hover {
+    color: #02B875;
+    text-decoration: none !important;
+}
+/***************************************************************************/
 /********************************** PROFILE ********************************/
 .user-edit-profile {
     min-width: 100%;

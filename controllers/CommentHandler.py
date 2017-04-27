@@ -13,4 +13,4 @@ class CommentHandler(webapp2.RequestHandler):
         comment.text = self.request.get('comment-text')
         comment.put()
 
-        self.redirect("/")
+        self.redirect("/read_story?id={0}".format(comment.story_key))
