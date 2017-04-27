@@ -8,13 +8,54 @@ from models.Comment import Comment
 from models.User import User
 
 
+def create_avatar_dictionary(story, story_id):
+    """
+    Create a dictionary with author email as the key and
+    the author's avatar as the value. This dictionary
+    will be used to display the avatar on the story comments
+    :param story: Story to be read
+    :param story_id: Identifier of the story
+    :return: Dictionary with K:author email, V:author avatar
+    """
+    # Concat 3 lists
+    avatars = dict()
+    # Retrieve the story author avatar
+    if story is not None:
+        user = User.query(User.user_email == story.author)
+        user = user.get()
+        if user.avatar != "":
+            avatars[user.user_email] = user.avatar
+        else:
+            avatars[user.user_email] = None
+    # Retrieve the comments authors avatars
+    if story_id is not None:
+        comments = Comment.query(Comment.story_key == story_id)
+        for c in comments:
+            u = User.query(User.user_email == c.author)
+            u = u.get()
+            if u.avatar != "":
+                avatars[c.author] = u.avatar
+            else:
+                avatars[c.author] = None
+
+    return avatars
+
+
 class WriteStoryHandler(webapp2.RequestHandler):
     def get(self):
         """
         Open the story editor to create a new awesome story
         """
+        user = users.get_current_user()
+        if user is not None:
+            user = user.nickname()
+
+        values = {
+            "nickname": user,
+            "loginurl": users.create_login_url("/")
+        }
         jinja = jinja2.get_jinja2(app=self.app)
-        self.response.write(jinja.render_template("write_story.html", **{}))
+        self.response.write(jinja.render_template("write_story.html", **values))
 
     def post(self):
         """
@@ -39,6 +80,9 @@ class WriteStoryHandler(webapp2.RequestHandler):
 
 
 class EditStoryHandler(webapp2. RequestHandler):
+    """
+    Open the story to be edited
+    """
     def get(self):
         try:
             id = self.request.GET['id']
@@ -46,10 +90,14 @@ class EditStoryHandler(webapp2. RequestHandler):
             id = None
 
         story = ndb.Key(urlsafe=id).get()
-
+        user = users.get_current_user()
+        if user is not None:
+            user = user.nickname()
         if story is not None:
             values = {
-                "story": story
+                "story": story,
+                "nickname": user,
+                "loginurl": users.create_login_url("/")
             }
             jinja = jinja2.get_jinja2(app=self.app)
             self.response.write(jinja.render_template("write_story_edit.html", **values))
@@ -92,7 +140,6 @@ class ReadStoryHandler(webapp2.RequestHandler):
         except:
             id = None
 
-        time.sleep(2)
         story = ndb.Key(urlsafe=id).get()
         user = users.get_current_user()
         if user:
@@ -101,12 +148,14 @@ class ReadStoryHandler(webapp2.RequestHandler):
             user = None
         loginurl = users.create_login_url("/")
         comments = Comment.query(id == Comment.story_key)
+        avatars = create_avatar_dictionary(story, id)
         read_values = {
             "nickname": user,
             "loginurl": loginurl,
             "story": story,
             "user": user,
-            "comments": comments
+            "comments": comments,
+            "avatars": avatars
         }
         jinja = jinja2.get_jinja2(app=self.app)
         self.response.write(jinja.render_template("read_story.html", **read_values))

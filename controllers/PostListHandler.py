@@ -34,9 +34,10 @@ def create_tags_cloud(stories):
     tags = list()
     for s in stories:
         if s.tags:
+            print(s.tags)
             tags = tags + s.tags
 
-    return set(tags)
+    return set(filter(None, tags))  # Remove empty tags
 
 
 def get_tag_stories(stories, tag):

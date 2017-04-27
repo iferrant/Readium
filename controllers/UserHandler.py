@@ -19,7 +19,6 @@ def retrieve_like_stories(profile):
     if user_profile.likes:
         for l in user_profile.likes:
             likes.append(ndb.Key(urlsafe=l).get())
-            time.sleep(1)
 
     return likes
 
@@ -43,13 +42,12 @@ def retrieve_bookmarks(profile):
     :return: List of stories
     """
     user_profile = profile.get()
-    bookmars = list()
+    bookmarks = list()
     if user_profile.bookmarks:
         for b in user_profile.bookmarks:
-            bookmars.append(ndb.Key(urlsafe=b).get())
-            time.sleep(1)
+            bookmarks.append(ndb.Key(urlsafe=b).get())
 
-    return bookmars
+    return bookmarks
 
 
 def retrieve_following(profile):

@@ -3,8 +3,19 @@
 <div class="read-container-background">
     <div class="read-container">
         <div class="read-story-user">
-            <p class="card-user">{{ story.author }}</p>
-            <p class="card-date">{{ story.date }}</p>
+            {% if avatars[story.author] %}
+                <a href="/profile?user={{ story.author }}">
+                    <img src='data:image/png;base64, {{ avatars[story.author].encode("base64") }}' class="img-circle" alt="User avatar">
+                </a>
+            {% else %}
+                <a href="/profile?user={{ story.author }}">
+                    <img src='static/img/default-avatar.png' class="img-circle" alt="User avatar">
+                </a>
+            {% endif %}
+            <div class="read-story-user-info">
+                <p class="card-user"><a href="/profile?user={{ story.author }}">{{ story.author }}</a></p>
+                <p class="card-date">{{ story.date }}</p>
+            </div>
         </div>
         <p class="read-story-title">{{ story.title }}
             {% if story.author == nickname %}
@@ -38,8 +49,19 @@
 {% for c in comments %}
     <div class="comment-container">
         <div class="comment-header">
-            <a href="/profile?user={{ c.author }}">{{ c.author}}</a>
-            <p class="comment-date">{{ c.date }}</p>
+            {% if avatars[story.author] %}
+                <a href="/profile?user={{ c.author }}">
+                    <img src='data:image/png;base64, {{ avatars[c.author].encode("base64") }}' class="img-circle" alt="User avatar">
+                </a>
+            {% else %}
+                <a href="/profile?user={{ c.author }}">
+                    <img src='static/img/default-avatar.png' class="img-circle" alt="User avatar">
+                </a>
+            {% endif %}
+            <div class="comment-user-info">
+                <a href="/profile?user={{ c.author }}">{{ c.author}}</a>
+                <p class="comment-date">{{ c.date }}</p>
+            </div>
         </div>
         <p class="comment-text">{{ c.text }}</p>
     </div>

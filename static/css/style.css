@@ -496,6 +496,32 @@ textarea:focus, input:focus{
     height: 100%;
 }
 
+.read-story-user {
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+.read-story-user img{
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+}
+
+.read-story-user-info .card-user {
+    margin-bottom: 2px;
+}
+
+.read-story-user-info a {
+    color: #02B875;
+    font-size: 1.15em;
+    text-decoration: none !important;
+}
+
 .read-container {
     max-width: 700px;
     margin-left: auto;
@@ -539,7 +565,7 @@ textarea:focus, input:focus{
 }
 
 .write-comment-container textarea {
-    min-width: 500px;
+    min-width: 700px;
     font-size: 1.2em;
     padding: 12px 20px;
     margin-bottom: 10px;
@@ -567,7 +593,8 @@ textarea:focus, input:focus{
 
 .comment-container {
     background-color: white;
-    max-width: 500px;
+    max-width: 700px;
+    min-width: 100px;
     min-height: 100px;
     padding: 20px;
     margin-right: auto;
@@ -580,6 +607,10 @@ textarea:focus, input:focus{
     -webkit-justify-content: flex-start;
     -webkit-flex-direction: column;
     flex-direction: column;
+}
+
+.comment-text {
+    margin-top: 20px;
 }
 
 .comment-date {
@@ -596,6 +627,22 @@ textarea:focus, input:focus{
 .comment-container a:hover {
     color: #02B875;
     text-decoration: none !important;
+}
+
+.comment-header {
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+.comment-header img{
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    margin-bottom: 5px;
 }
 /***************************************************************************/
 /********************************** PROFILE ********************************/

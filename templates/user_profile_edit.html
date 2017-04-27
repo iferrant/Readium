@@ -7,9 +7,13 @@
             <input type="text" name="user-lastname" value="{{ user.lastname}}" required>
             {% if user.description %}
                 <textarea name="user-description" placeholder="{{ user.description }}"> {{ user.description}}</textarea>
+            {% else %}
+                <textarea name="user-description" placeholder="Tell something about you..."></textarea>
             {% endif %}
             {% if user.interest %}
                 <input type="text" name="user-interest" value="{{ user.interest }}">
+            {% else %}
+                <input type="text" name="user-interest" placeholder="Your hobbies or interest">
             {% endif %}
             <label for="editavatar"> Image profile</label>
             {% if user.avatar %}
