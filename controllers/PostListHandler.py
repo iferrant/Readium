@@ -33,7 +33,7 @@ def create_tags_cloud(stories):
     """
     tags = list()
     for s in stories:
-        if s.tags and s.tags:
+        if s.tags:
             tags = tags + s.tags
 
     return set(tags)

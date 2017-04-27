@@ -202,6 +202,18 @@ body {
     width: 640px;
     height: 185px;
     overflow: hidden;
+    position: relative;
+}
+
+.card-image-container img {
+    position: absolute;
+    left: -1000%;
+    right: -1000%;
+    top: -1000%;
+    bottom: -1000%;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
 }
 
 .card .image-responsive {
@@ -470,10 +482,14 @@ textarea:focus, input:focus{
 }
 
 .read-container-image {
-    height: 90%;
+    max-height: 700px;
     width: 100%;
     text-align: center;
     overflow: hidden;
+}
+
+.read-container-image img {
+    text-align: center;
 }
 
 .read-story-image {

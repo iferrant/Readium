@@ -36,7 +36,9 @@
                 <img src='data:image/png;base64, {{ u.avatar.encode("base64") }}' class="img-circle" alt="Profile avatar">
             </div>
         {% else %}
-            <img src='static/img/default-avatar.png' class="img-circle" alt="User avatar">
+            <div class="user-profile-image">
+                <img src='static/img/default-avatar.png' class="img-circle" alt="User avatar">
+            </div>
         {% endif %}
         </div>
         <ul class="nav nav-pills">

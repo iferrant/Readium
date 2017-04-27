@@ -22,9 +22,9 @@
                 </div>
             </div>
             {% if s.image %}
-            <div class="card-image-container">
-                <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
-            </div>
+                <div class="card-image-container">
+                    <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
+                </div>
             {% endif %}
             <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
             <!--Text-->
