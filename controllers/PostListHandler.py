@@ -17,10 +17,11 @@ def create_avatar_dictionary(stories):
     for s in stories:
         user = User.query(User.user_email == s.author)
         user = user.get()
-        if user.avatar != "":
-            avatars[user.user_email] = user.avatar
-        else:
-            avatars[user.user_email] = None
+        if user is not None:
+            if user.avatar != "":
+                avatars[user.user_email] = user.avatar
+            else:
+                avatars[user.user_email] = None
 
     return avatars
 

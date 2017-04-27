@@ -2,8 +2,11 @@
 {% block readStoryContainer %}
 <div class="write-story">
     <form class="write-story-form" action="/write_story" method="post" enctype="multipart/form-data">
-        <input type="file" name="story-image" id="uploadimage">
-        <input class="tags-input" type="text" name="story-tags" placeholder="Story tags separated by comma">
+        <div class="write-story-image-tag">
+            <label for="uploadimage">Story image</label>
+            <input type="file" name="story-image" id="uploadimage">
+            <input class="tags-input" type="text" name="story-tags" placeholder="Story tags separated by comma">
+        </div>
         <div class="write-story-form-button">
             <input type="text" name="story-title" placeholder="Title" required>
             <input type="submit" value="Publish">

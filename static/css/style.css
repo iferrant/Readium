@@ -347,7 +347,7 @@ body {
 }
 
 .search-box input{
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     padding-left: 26px;
     background-image: url("/static/img/glass.png");
     background-color: transparent;
@@ -424,6 +424,33 @@ body {
     flex-basis: 600px;
     flex-grow: 1;
     flex-shrink: 1;
+}
+
+.write-story-form input[type=file] {
+    display: none;
+}
+
+.write-story-form label {
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    background-color: #02B875;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 14px 14px;
+    border: none;
+    border-radius: 5px;
+}
+
+.write-story-image-tag {
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    -webkit-align-items: center;
+    align-items: center;
 }
 
 .write-story-form-button {

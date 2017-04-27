@@ -23,20 +23,22 @@ def create_avatar_dictionary(story, story_id):
     if story is not None:
         user = User.query(User.user_email == story.author)
         user = user.get()
-        if user.avatar != "":
-            avatars[user.user_email] = user.avatar
-        else:
-            avatars[user.user_email] = None
+        if user is not None:
+            if user.avatar != "":
+                avatars[user.user_email] = user.avatar
+            else:
+                avatars[user.user_email] = None
     # Retrieve the comments authors avatars
     if story_id is not None:
         comments = Comment.query(Comment.story_key == story_id)
         for c in comments:
             u = User.query(User.user_email == c.author)
             u = u.get()
-            if u.avatar != "":
-                avatars[c.author] = u.avatar
-            else:
-                avatars[c.author] = None
+            if u is not None:
+                if u.avatar != "":
+                    avatars[c.author] = u.avatar
+                else:
+                    avatars[c.author] = None
 
     return avatars
 
