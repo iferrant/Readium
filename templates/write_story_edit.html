@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block writeStoryContainer %}
+{% block readStoryContainer %}
 <div class="write-story">
     <form class="write-story-form" action="/edit_story?id={{ story.key.urlsafe() }}" method="post" enctype="multipart/form-data">
         {% if story.image %}
@@ -14,4 +14,7 @@
         <textarea name="story-text" placeholder="Tell your story...">{{ story.text }}</textarea>
     </form>
 </div>
+<script>
+    CKEDITOR.replace( 'story-text' );
+</script>
 {% endblock %}

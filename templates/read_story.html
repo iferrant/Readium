@@ -31,7 +31,7 @@
         </div>
     {% endif %}
     <div class="read-container">
-        <p class="read-story-text">{{ story.text }}</p>
+        <span class="read-story-text">{{ story.text|safe }}</span>
     </div>
 </div>
 

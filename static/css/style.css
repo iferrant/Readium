@@ -435,7 +435,7 @@ body {
     display: -webkit-flex !important;
     display: flex;
 }
-
+/*
 .write-story-form textarea {
     font-size: 1.2em;
     width: 100%;
@@ -450,7 +450,7 @@ body {
     flex-grow: 1;
     flex-shrink: 1;
 }
-
+*/
 .write-story-form input[type=file] {
     display: none;
 }
