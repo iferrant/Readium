@@ -92,6 +92,7 @@ body {
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
+
 .panel-login input:hover,
 .panel-login input:focus {
 	outline:none;
@@ -100,6 +101,7 @@ body {
 	box-shadow: none;
 	border-color: #ccc;
 }
+
 .btn-login {
 	background-color: #02B875;
 	outline: none;
@@ -117,10 +119,12 @@ body {
 	background-color: #02B875;
 	border-color: #02B875;
 }
+
 .forgot-password {
 	text-decoration: underline;
 	color: #888;
 }
+
 .forgot-password:hover,
 .forgot-password:focus {
 	text-decoration: underline;
@@ -138,12 +142,14 @@ body {
 	text-transform: uppercase;
 	border-color: #02B875;
 }
+
 .btn-register:hover,
 .btn-register:focus {
 	color: #fff;
 	background-color: #02B875;
 	border-color: #02B875;
 }
+
 /***************************************************************************/
 /*********************** MAIN CONTAINER ************************************/
 
@@ -397,6 +403,7 @@ body {
     background-color: white;
     border: 1px solid #EEEEEE !important;
 }
+
 /***************************************************************************/
 /**************************** WRITE STORY **********************************/
 .write-story {
@@ -460,6 +467,7 @@ body {
     padding: 14px 14px;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .write-story-image-tag {
