@@ -13,11 +13,18 @@
             </div>
         </div>
         {% if s.image %}
-        <div class="card-image-container">
-            <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
-        </div>
+            <div class="card-image-container">
+                <img src='data:image/png;base64, {{ s.image.encode("base64") }}' class="image-responsive" alt="">
+            </div>
         {% endif %}
-        <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
+        <div class="card-title-remove">
+            <a class="card-title" href="/read_story?id={{ s.key.urlsafe() }}">{{ s.title }}</a>
+            {% if nickname == s.author %}
+                <form action="/remove_story?id={{ s.key.urlsafe() }}" method="post">
+                    <input type="image" src="../static/img/delete.png" width="24" height="24">
+                </form>
+            {% endif %}
+        </div>
         <p class="card-text">{{ s.text }}</p>
         <div class="card-btns">
             <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>

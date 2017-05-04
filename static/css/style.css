@@ -49,12 +49,14 @@ body {
 	box-shadow: 0 0 1px #B0B0B0;
     font-family: "Lato", Monaco, sans-serif !important;
 }
+
 .panel-login>.panel-heading {
 	color: #00415d;
 	background-color: #fff;
 	border-color: #fff;
 	text-align:center;
 }
+
 .panel-login>.panel-heading a{
 	text-decoration: none;
 	color: #666;
@@ -64,10 +66,12 @@ body {
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
+
 .panel-login>.panel-heading a.active{
 	color: #02B875;
 	font-size: 18px;
 }
+
 .panel-login>.panel-heading hr{
 	margin-top: 10px;
 	margin-bottom: 0px;
@@ -79,6 +83,7 @@ body {
 	background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 }
+
 .panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
 	height: 45px;
 	border: 1px solid #ddd;
@@ -142,7 +147,7 @@ body {
 /***************************************************************************/
 /*********************** MAIN CONTAINER ************************************/
 
-.col-md-7 {
+.col-md-8 {
     font-family: "Lato", Monaco, sans-serif !important;
     display: -webkit-flex !important;
     display: flex;
@@ -154,7 +159,7 @@ body {
     align-items: flex-end;
 }
 
-.col-md-5 {
+.col-md-4 {
     font-family: "Lato", Monaco, sans-serif !important;
     display: -webkit-flex !important;
     display: flex;
@@ -237,6 +242,19 @@ body {
     width: 40px;
     height: 40px;
     margin-right: 10px;
+}
+
+.card-title-remove {
+    display: -webkit-flex !important;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.card-title-remove form{
+    padding-top: 15px;
+    padding-right: 10px;
+    margin-left: 40px;
 }
 
 .card-block .card-tags {

@@ -132,6 +132,25 @@ class EditStoryHandler(webapp2. RequestHandler):
             self.redirect("/")
 
 
+class RemoveStoryHandler(webapp2.RequestHandler):
+    def post(self):
+        """
+        Remove story
+        """
+        try:
+            id = self.request.GET['id']
+        except:
+            id = None
+
+        story = ndb.Key(urlsafe=id).get()
+        if story is not None:
+            if users.get_current_user().nickname() == story.author:
+                ndb.Key(urlsafe=id).delete()
+                time.sleep(1)
+
+        self.redirect("/")
+
+
 class ReadStoryHandler(webapp2.RequestHandler):
     def get(self):
         """

@@ -18,7 +18,8 @@ import webapp2
 from controllers.PostListHandler import PostListHandler
 from controllers.UserHandler import UserProfile, EditUserHandler, FollowUserHandler, UnFollowHandler,\
     BookmarkStoryHandler
-from controllers.StoryHandler import WriteStoryHandler, EditStoryHandler, ReadStoryHandler, LikeStoryHandler
+from controllers.StoryHandler import WriteStoryHandler, EditStoryHandler, ReadStoryHandler, RemoveStoryHandler,\
+    LikeStoryHandler
 from controllers.CommentHandler import CommentHandler
 
 app = webapp2.WSGIApplication([
@@ -27,6 +28,7 @@ app = webapp2.WSGIApplication([
     ('/write_story', WriteStoryHandler),
     ('/edit_story', EditStoryHandler),
     ('/read_story', ReadStoryHandler),
+    ('/remove_story', RemoveStoryHandler),
     ('/comment', CommentHandler),
     ('/profile', UserProfile),
     ('/edit_profile', EditUserHandler),

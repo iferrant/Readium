@@ -18,7 +18,9 @@ def retrieve_like_stories(profile):
     likes = list()
     if user_profile.likes:
         for l in user_profile.likes:
-            likes.append(ndb.Key(urlsafe=l).get())
+            story = ndb.Key(urlsafe=l).get()
+            if story is not None:
+                likes.append(story)
 
     return likes
 
@@ -45,7 +47,9 @@ def retrieve_bookmarks(profile):
     bookmarks = list()
     if user_profile.bookmarks:
         for b in user_profile.bookmarks:
-            bookmarks.append(ndb.Key(urlsafe=b).get())
+            bm = ndb.Key(urlsafe=b).get()
+            if bm is not None:
+                bookmarks.append(bm)
 
     return bookmarks
 
@@ -62,7 +66,8 @@ def retrieve_following(profile):
         for f in user_profile.following:
             user = User.query(User.user_email == f)
             user = user.get()
-            following.append(user)
+            if user is not None:
+                following.append(user)
 
     return following
 
@@ -79,7 +84,8 @@ def retrieve_followers(profile):
         for f in user_profile.followers:
             user = User.query(User.user_email == f)
             user = user.get()
-            followers.append(user)
+            if user is not None:
+                followers.append(user)
 
     return followers
 
