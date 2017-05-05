@@ -32,5 +32,3 @@ CKEDITOR.editorConfig = function( config ) {
 	// Dialog windows are also simplified.
 	config.removeDialogTabs = 'link:advanced';
 };
-CKEDITOR.config.font_defaultLabel = 'Arial';
-CKEDITOR.config.fontSize_defaultLabel = '900';
