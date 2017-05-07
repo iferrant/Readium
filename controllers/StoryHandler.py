@@ -6,6 +6,11 @@ from google.appengine.ext import ndb
 from models.Story import Story
 from models.Comment import Comment
 from models.User import User
+#  These three lines are necessary for like/bookmark
+#  stories that contains special characters on title
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 def create_avatar_dictionary(story, story_id):

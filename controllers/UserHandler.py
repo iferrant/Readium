@@ -6,6 +6,10 @@ from google.appengine.api import users
 from google.appengine.ext import ndb
 from models.User import User
 from models.Story import Story
+#  To not crash when there are special
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 def retrieve_like_stories(profile):
