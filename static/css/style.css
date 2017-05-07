@@ -318,6 +318,7 @@ body {
 }
 
 .card-btns {
+    padding-top: 30px;
     display: -webkit-flex !important;
     display: flex;
     -webkit-flex-wrap: wrap;
