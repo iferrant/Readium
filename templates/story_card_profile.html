@@ -25,7 +25,7 @@
                 </form>
             {% endif %}
         </div>
-        <p class="card-text">{{ s.text }}</p>
+        <p class="card-text">{{ s.text|safe }}</p>
         <div class="card-btns">
             <a href="/read_story?id={{ s.key.urlsafe() }}" class="btn-read-more">Read more...</a>
         </div>

@@ -155,6 +155,7 @@ body {
 
 .col-md-8 {
     font-family: "Lato", Monaco, sans-serif !important;
+    margin-bottom: 80px;
     display: -webkit-flex !important;
     display: flex;
     -webkit-flex-wrap: wrap;
@@ -167,6 +168,7 @@ body {
 
 .col-md-4 {
     font-family: "Lato", Monaco, sans-serif !important;
+    margin-bottom: 80px;
     display: -webkit-flex !important;
     display: flex;
     -webkit-flex-wrap: wrap;
