@@ -22,7 +22,6 @@ def create_avatar_dictionary(story, story_id):
     :param story_id: Identifier of the story
     :return: Dictionary with K:author email, V:author avatar
     """
-    # Concat 3 lists
     avatars = dict()
     # Retrieve the story author avatar
     if story is not None:
