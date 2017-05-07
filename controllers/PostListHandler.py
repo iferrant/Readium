@@ -65,9 +65,9 @@ def search_story(stories, search):
     """
     result = list()
     for s in stories:
-        if s.title.find(search) != -1:
+        if s.title.find(search) != -1 and s not in result:
             result.append(s)
-        if s.text.find(search) != -1:
+        if s.text.find(search) != -1 and s not in result:
             result.append(s)
 
     return result
