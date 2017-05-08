@@ -99,14 +99,14 @@ class EditStoryHandler(webapp2. RequestHandler):
         user = users.get_current_user()
         if user is not None:
             user = user.nickname()
-        if story is not None:
-            values = {
-                "story": story,
-                "nickname": user,
-                "loginurl": users.create_login_url("/")
-            }
-            jinja = jinja2.get_jinja2(app=self.app)
-            self.response.write(jinja.render_template("write_story_edit.html", **values))
+            if story is not None:
+                values = {
+                    "story": story,
+                    "nickname": user,
+                    "loginurl": users.create_login_url("/")
+                }
+                jinja = jinja2.get_jinja2(app=self.app)
+                self.response.write(jinja.render_template("write_story_edit.html", **values))
 
         else:
             self.redirect("/")

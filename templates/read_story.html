@@ -19,7 +19,7 @@
         </div>
         <p class="read-story-title">{{ story.title }}
             {% if story.author == nickname %}
-                <a href="/edit_story?id= {{ story.key.urlsafe() }}">
+                <a href="/edit_story?id={{ story.key.urlsafe() }}">
                     <img src="../static/img/edit.png" alt="Edit"/>
                 </a>
             {% endif %}
