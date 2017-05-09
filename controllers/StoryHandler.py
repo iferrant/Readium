@@ -1,7 +1,7 @@
 import webapp2
 import time
 from webapp2_extras import jinja2
-from google.appengine.api import users
+from google.appengine.api import users, images
 from google.appengine.ext import ndb
 from models.Story import Story
 from models.Comment import Comment
@@ -51,17 +51,21 @@ class WriteStoryHandler(webapp2.RequestHandler):
     def get(self):
         """
         Open the story editor to create a new awesome story
+        If the user didn't edit his profile, open the profile editor
         """
         user = users.get_current_user()
+        jinja = jinja2.get_jinja2(app=self.app)
         if user is not None:
             user = user.nickname()
-
-        values = {
-            "nickname": user,
-            "loginurl": users.create_login_url("/")
-        }
-        jinja = jinja2.get_jinja2(app=self.app)
-        self.response.write(jinja.render_template("write_story.html", **values))
+            is_logued = User.query(User.user_email == user).get()
+            if is_logued is None:
+                self.response.write(jinja.render_template("user_profile_edit.html", **{}))
+            else:
+                values = {
+                    "nickname": user,
+                    "loginurl": users.create_login_url("/")
+                }
+                self.response.write(jinja.render_template("write_story.html", **values))
 
     def post(self):
         """

@@ -20,11 +20,12 @@ def retrieve_like_stories(profile):
     """
     user_profile = profile.get()
     likes = list()
-    if user_profile.likes:
-        for l in user_profile.likes:
-            story = ndb.Key(urlsafe=l).get()
-            if story is not None:
-                likes.append(story)
+    if user_profile:
+        if user_profile.likes:
+            for l in user_profile.likes:
+                story = ndb.Key(urlsafe=l).get()
+                if story is not None:
+                    likes.append(story)
 
     return likes
 
@@ -49,11 +50,12 @@ def retrieve_bookmarks(profile):
     """
     user_profile = profile.get()
     bookmarks = list()
-    if user_profile.bookmarks:
-        for b in user_profile.bookmarks:
-            bm = ndb.Key(urlsafe=b).get()
-            if bm is not None:
-                bookmarks.append(bm)
+    if user_profile:
+        if user_profile.bookmarks:
+            for b in user_profile.bookmarks:
+                bm = ndb.Key(urlsafe=b).get()
+                if bm is not None:
+                    bookmarks.append(bm)
 
     return bookmarks
 
@@ -66,12 +68,13 @@ def retrieve_following(profile):
     """
     user_profile = profile.get()
     following = list()
-    if user_profile.following:
-        for f in user_profile.following:
-            user = User.query(User.user_email == f)
-            user = user.get()
-            if user is not None:
-                following.append(user)
+    if user_profile:
+        if user_profile.following:
+            for f in user_profile.following:
+                user = User.query(User.user_email == f)
+                user = user.get()
+                if user is not None:
+                    following.append(user)
 
     return following
 
@@ -84,12 +87,13 @@ def retrieve_followers(profile):
     """
     user_profile = profile.get()
     followers = list()
-    if user_profile.followers:
-        for f in user_profile.followers:
-            user = User.query(User.user_email == f)
-            user = user.get()
-            if user is not None:
-                followers.append(user)
+    if user_profile:
+        if user_profile.followers:
+            for f in user_profile.followers:
+                user = User.query(User.user_email == f)
+                user = user.get()
+                if user is not None:
+                    followers.append(user)
 
     return followers
 
