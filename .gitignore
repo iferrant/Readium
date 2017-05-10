@@ -1,3 +1,6 @@
 .idea
+.ropeproject
+*.pyc
 start_server
+*.datastore
 
